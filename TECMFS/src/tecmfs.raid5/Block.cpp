@@ -19,6 +19,7 @@
 Block::Block(){
 
 }
+
 /**
  * Constructor with the path.
  */
@@ -28,7 +29,6 @@ Block::Block(string path) {
 	//this->size
 	//this->file
 }
-
 
 /**
  * Destroyer
@@ -110,3 +110,43 @@ string Block::generateIDAux(unsigned char const* bytes_to_encode, unsigned int i
 	  }
 	  return ret;
 }
+
+
+void Block::saveData(string data){
+	 ofstream myfile ("blockA.txt");
+	  if (myfile.is_open())
+	  {
+		myfile << data << endl;
+		myfile.close();
+	  }
+	  else cout << "Unable to open file.";
+}
+
+
+
+void Block::readData(){
+	string line;
+	//ifstream blockFile ("block.txt");
+	if (blockFile.is_open()){
+		while ( blockFile (blockFile,line)){
+		  cout << line << '\n';
+		}
+		blockFile.close();
+	}
+	else cout << "Unable to open file";
+}
+
+
+string Block::getData(){
+	string data,line;
+	//ifstream blockFile ("example.txt");
+	if (blockFile.is_open()){
+		while ( getline (blockFile,line)){
+			data+=line;
+		}
+		blockFile.close();
+	}
+	else cout << "Unable to open file";
+}
+
+

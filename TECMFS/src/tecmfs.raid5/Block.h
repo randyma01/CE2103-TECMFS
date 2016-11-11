@@ -17,7 +17,7 @@ class Block {
 public:
 
 	/*Attributes*/
-	ifstream blockFile;
+	ifstream blockFile = ("aiuuudaaaaaa");
 	string ID; /*Identificator of this Block*/
 	int size = 20000; /*Size of the block: bytes.*/
 	string path; /*Path of the location of the save data.*/
@@ -26,16 +26,18 @@ public:
 	Block(string Path); /*Constructor with the path.*/
 	virtual ~Block(); /*Destoyer.*/
 
-	/*Getters*/
+	/*Getters of the attributes.*/
 	string getID();
 	int getSize();
 	string getPath();
 
-	void receiveData(); /*Receive and save data into the file.*/
-	void sendData(); /*Send the data that has in the file.*/
-	bool hasData(); /*Check if the bile is busy.*/
-	bool maxSize(); /*Check if there is free space.*/
-	int checkSize(); /*Check the actual size of the file.*/
+	/*Methods*/
+	void saveData(string data); /*Writes the data on the file.*/
+	void readData(); /*Read the data on th file.*/
+	void checkSize(); /*Checks the size of the file.*/
+	bool maxSize(); /*Verifies if there's free space on the file.*/
+	string getData(); /*Gets the data of the block.*/
+
 
 	string generateID(); /*Generate a coded string as an ID.*/
 	string generateIDAux(unsigned char const* bytes_to_encode, unsigned int in_len); /*Generate a coded string as an ID*/
