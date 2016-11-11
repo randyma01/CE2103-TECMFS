@@ -1,12 +1,1 @@
-This is a line.
-This is another line.
-This is another line.
-This is another line.
-This is another line.
-This is another line.
-This is another line.
-This is another line.
-This is another line.
-This is another line.
-This is another line.
-This is another line.
+Writing this to a file.

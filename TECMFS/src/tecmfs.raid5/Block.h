@@ -17,7 +17,7 @@ class Block {
 public:
 
 	/*Attributes*/
-	ifstream blockFile = ("aiuuudaaaaaa");
+	ifstream blockFile;
 	string ID; /*Identificator of this Block*/
 	int size = 20000; /*Size of the block: bytes.*/
 	string path; /*Path of the location of the save data.*/

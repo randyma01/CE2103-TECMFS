@@ -25,24 +25,27 @@ int main() {
 
 
 
+	ofstream myfile1;
+	  myfile1.open ("holili.txt");
+	  //myfile1 <<;
+	  myfile1.close();
 
 
 
 
-/*******READING***********/
 
 
 
 
 
 /*******SIZING***********/
-//	streampos begin,end;
-//	ifstream myfile ("example.txt");
-//	begin = myfile.tellg();
-//	myfile.seekg (0, ios::end);
-//	end = myfile.tellg();
-//	myfile.close();
-//	cout << "size is: " << (end-begin) << " bytes.\n";
+	streampos begin,end;
+	ifstream myfile ("holili.txt");
+	begin = myfile.tellg();
+	myfile.seekg (0, ios::end);
+	end = myfile.tellg();
+	myfile.close();
+	cout << "size is: " << (end-begin) << " bytes.\n";
 
 
 	return 0;

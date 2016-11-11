@@ -124,17 +124,17 @@ void Block::saveData(string data){
 
 
 
-void Block::readData(){
-	string line;
-	//ifstream blockFile ("block.txt");
-	if (blockFile.is_open()){
-		while ( blockFile (blockFile,line)){
-		  cout << line << '\n';
-		}
-		blockFile.close();
-	}
-	else cout << "Unable to open file";
-}
+//void Block::readData(){
+//	string line;
+//	ifstream blockFile ("block.txt");
+//	if (blockFile.is_open()){
+//		while ( blockFile (blockFile,line)){
+//		  cout << line << '\n';
+//		}
+//		blockFile.close();
+//	}
+//	else cout << "Unable to open file";
+//}
 
 
 string Block::getData(){
