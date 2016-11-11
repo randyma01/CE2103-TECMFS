@@ -13,15 +13,26 @@
 #include <stdlib.h>
 #include <sstream>
 
-Block::Block() {
+/**
+ * Constructor.
+ */
+Block::Block(){
+
+}
+/**
+ * Constructor with the path.
+ */
+Block::Block(string path) {
 	this->path = "/home/randy/git/TECMFS/TECMFS/";
 	this->ID = generateID();
-	this->ip = "123456789";
-	//this->port
 	//this->size
 	//this->file
 }
 
+
+/**
+ * Destroyer
+ */
 Block::~Block() {
 
 }

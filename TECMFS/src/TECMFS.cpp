@@ -12,43 +12,65 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sstream>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
 
 using namespace std;
 
 int main() {
 	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
+//	 mkdir("/home/randy/holili", 0700);
 
 
-//	ofstream outfile ("test.bin");
-//	outfile << "1010101100011101" << endl;
-//	outfile.close();
 
+/*******WRTTING***********/
 
-//	ofstream myfile;
-//	myfile.open ("example.txt");
-//	myfile << "Writing this to a file.\n";
+// ofstream myfile ("example.txt");
+//  if (myfile.is_open())
+//  {
+//	myfile << "This is a line.\n";
+//	myfile << "This is another line.\n";
+//	myfile << "This is another line.\n";
+//	myfile << "This is another line.\n";
+//	myfile << "This is another line.\n";
+//	myfile << "This is another line.\n";
+//	myfile << "This is another line.\n";
+//	myfile << "This is another line.\n";
+//	myfile << "This is another line.\n";
+//	myfile << "This is another line.\n";
+//	myfile << "This is another line.\n";
+//	myfile << "This is another line.\n";
 //	myfile.close();
+//  }
+//  else cout << "Unable to open file";
 
-
-//	ofstream myfile;
-//	//myfile.open ("test.bin", ios::out | ios::app | ios::binary);
-//
-//	if (myfile.is_open()) {
-//		myfile << "holili" << endl;
+/*******READING***********/
+// string line;
+//  ifstream myfile ("example.txt");
+//  if (myfile.is_open())
+//  {
+//	while ( getline (myfile,line) )
+//	{
+//	  cout << line << '\n';
 //	}
 //	myfile.close();
+//  }
+//
+//  else cout << "Unable to open file";
 
 
 
-//	ofstream myfile ("block.txt");
-//	  if (myfile.is_open())
-//	  {
-//	    myfile << "This is a line.\n";
-//	    myfile << "This is another line.\n";
-//	    myfile.close();
-//	  }
-//	  else cout << "Unable to open file";
-//	  return 0;
+
+/*******SIZING***********/
+//	streampos begin,end;
+//	ifstream myfile ("example.txt");
+//	begin = myfile.tellg();
+//	myfile.seekg (0, ios::end);
+//	end = myfile.tellg();
+//	myfile.close();
+//	cout << "size is: " << (end-begin) << " bytes.\n";
 
 
 	return 0;

@@ -11,27 +11,24 @@
 #include <iostream>
 #include <fstream>
 
-
-
 using namespace std;
 
 class Block {
 public:
+
+	/*Attributes*/
 	ifstream blockFile;
-	char ID; /*Identificator of this Block*/
-	int size; /*---> must define size<---*/
-	string ip; /*IP number for the Disk.*/
-	int port; /*PORT number of the Disk.*/
+	string ID; /*Identificator of this Block*/
+	int size = 20000; /*Size of the block: bytes.*/
 	string path; /*Path of the location of the save data.*/
 
-	Block(); /**/
-	virtual ~Block(); /**/
+	Block(); /*Constructor.*/
+	Block(string Path); /*Constructor with the path.*/
+	virtual ~Block(); /*Destoyer.*/
 
 	/*Getters*/
-	char getID();
+	string getID();
 	int getSize();
-	string getIP();
-	int getPort();
 	string getPath();
 
 	void receiveData(); /*Receive and save data into the file.*/
