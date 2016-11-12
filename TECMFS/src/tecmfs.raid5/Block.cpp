@@ -14,21 +14,21 @@
 #include <sstream>
 #include <fstream>
 
-
 /**
- * Constructor.
+ *
  */
 Block::Block(){
 
 }
 
 /**
- * Constructor with the path.
+ * Constructor.
  */
-Block::Block(string path) {
+Block::Block(string name) {
 	this->path = "/home/randy/git/TECMFS/TECMFS/";
 	this->ID = generateID();
 	this->size = 10000000;
+	this->name = name;
 }
 
 /**
@@ -37,7 +37,6 @@ Block::Block(string path) {
 Block::~Block() {
 
 }
-
 
 
 /**
@@ -67,6 +66,15 @@ string Block::getPath(){
 	return path;
 }
 
+/**
+ * Return the name of the block.
+ *
+ * @path
+ */
+string Block::getName(){
+	return name;
+}
+
 
 void Block::saveData(string data){
 	string id = this->getID();
@@ -77,7 +85,6 @@ void Block::saveData(string data){
 	}
 	else cout << "Unable to open file.";
 }
-
 
 
 void Block::readData(){
@@ -107,6 +114,30 @@ string Block::getData(){
 	else cout << "Unable to open file";
 	return data;
 }
+
+
+int Block::checkSizeData(){
+	int fileSize;
+	streampos begin,end;
+	string id = this->getID();
+	ifstream myfile("block"+id+".txt");
+	begin = myfile.tellg();
+	myfile.seekg (0, ios::end);
+	end = myfile.tellg();
+	myfile.close();
+	fileSize = (end-begin);
+	return fileSize;
+}
+
+bool Block::freeSize(){
+	bool freeSpace = false;
+	int fileSize = this->checkSizeData();
+	if (fileSize<this->getSize())
+		freeSpace = true;
+	return freeSpace;
+
+}
+
 
 
 

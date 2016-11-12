@@ -16,6 +16,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#include "tecmfs.raid5/Block.h"
 
 using namespace std;
 
@@ -23,29 +24,14 @@ int main() {
 	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
 //	 mkdir("/home/randy/holili", 0700);
 
+//
+//	Block testingBlock = Block();
+//	cout << testingBlock.getID() <<endl;
+//
+//	testingBlock.saveData("1100101010101010101010100001");
+//
+//	testingBlock.readData();
 
-
-	ofstream myfile1;
-	  myfile1.open ("holili.txt");
-	  //myfile1 <<;
-	  myfile1.close();
-
-
-
-
-
-
-
-
-
-/*******SIZING***********/
-	streampos begin,end;
-	ifstream myfile ("holili.txt");
-	begin = myfile.tellg();
-	myfile.seekg (0, ios::end);
-	end = myfile.tellg();
-	myfile.close();
-	cout << "size is: " << (end-begin) << " bytes.\n";
 
 
 	return 0;
