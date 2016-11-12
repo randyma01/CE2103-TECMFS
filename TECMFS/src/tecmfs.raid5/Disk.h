@@ -10,7 +10,6 @@
 
 #include "Block.h"
 
-
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -20,22 +19,34 @@ using namespace std;
 class Disk {
 
 private:
-	/*Atributes*/
+	/*Attributes*/
 	string ip; /*IP number for the Disk.*/
 	int port; /*PORT number of the Disk.*/
-	string pathDirectory; /*Path of the location of the save data.*/
-	string name; /*Name of the disk.*/
-	Block blockA = Block("A"); /*Block A.*/
-	Block blockB = Block("B"); /*Block B.*/
-	Block blockC = Block("C"); /*Block C.*/
-	Block blockP = Block("Parity"); /*Block for the Parity.*/
-	vector<Block> blocksVector = {blockA, blockB, blockC, blockP}; /*Vector full of the Blocks of the Disk.*/
+	char pathDirectory; /*Path of the location of the save data.*/
+	char name; /*Name of the disk.*/
+	vector<Block> blocksVector;/*Vector full of the Blocks of the Disk.*/
 
 
 public:
+
+
 	/*Methods*/
 	Disk(); /*Constructor.*/
+	Disk(char name, string IP, int port); /*+++++++++++++.*/
 	virtual ~Disk(); /*Destroyer.*/
+
+	/*Getters*/
+	string getIP();
+	int getPort();
+	char getPathDirectory();
+	char getName();
+	vector<Block> getBlocksVector();
+
+	/*Setters*/
+	void setIP(string ip);
+	void setPort(int port);
+	void setPath(char path);
+	void setName(char name);
 
 	/*Functions of the disk.*/
 	void receiveData(string data); /*Receive and save data into the file.*/

@@ -19,21 +19,21 @@ private:
 	/*Attributes*/
 	string ID; /*Identificator of this Block*/
 	int size; /*Size of the block: bytes.*/
-	string path; /*Path of the location of the save data.*/
-	string name; /*Name of the block.*/
+	char path; /*Path of the location of the save data.*/
+	char name; /*Name of the block.*/
 
 
 public:
 	/*Methods*/
-	Block();/*Constructor*/
-	Block(string name); /*Constructor.*/
+	Block();/*Constructor.*/
+	Block(char name, char path); /*Constructorwith the name.*/
 	virtual ~Block(); /*Destoyer.*/
 
-	/*Getters of the attributes.*/
+	/*Getters.*/
 	string getID();
 	int getSize();
-	string getPath();
-	string getName();
+	char getPath();
+	char getName();
 
 	/*Functions for the Block.*/
 	void saveData(string data); /*Writes the data on the file.*/

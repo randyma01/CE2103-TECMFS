@@ -24,11 +24,13 @@ Block::Block(){
 /**
  * Constructor.
  */
-Block::Block(string name) {
-	this->path = "/home/randy/git/TECMFS/TECMFS/";
+Block::Block(char name, char path) {
+	this->path = path;
 	this->ID = generateID();
 	this->size = 10000000;
 	this->name = name;
+
+	ofstream file(path);
 }
 
 /**
@@ -62,7 +64,7 @@ int Block::getSize(){
  *
  * @path
  */
-string Block::getPath(){
+char Block::getPath(){
 	return path;
 }
 
@@ -71,11 +73,13 @@ string Block::getPath(){
  *
  * @path
  */
-string Block::getName(){
+char Block::getName(){
 	return name;
 }
 
-
+/**
+ * http://www.cplusplus.com/doc/tutorial/files/
+ */
 void Block::saveData(string data){
 	string id = this->getID();
 	ofstream myfile("block"+id+".txt");
@@ -86,7 +90,9 @@ void Block::saveData(string data){
 	else cout << "Unable to open file.";
 }
 
-
+/**
+ * http://www.cplusplus.com/doc/tutorial/files/
+ */
 void Block::readData(){
 	string line;
 	string id = this->getID();
@@ -100,7 +106,9 @@ void Block::readData(){
 	else cout << "Unable to open file";
 }
 
-
+/**
+ * http://www.cplusplus.com/doc/tutorial/files/
+ */
 string Block::getData(){
 	string data,line;
 	string id = this->getID();
@@ -115,7 +123,9 @@ string Block::getData(){
 	return data;
 }
 
-
+/**
+ * http://www.cplusplus.com/doc/tutorial/files/
+ */
 int Block::checkSizeData(){
 	int fileSize;
 	streampos begin,end;
@@ -143,6 +153,8 @@ bool Block::freeSize(){
 
 /**
  * Converts an number (int) into a string.
+ *
+ * http://stackoverflow.com/questions/5590381/easiest-way-to-convert-int-to-string-in-c
  *
  * @param <T> number
  * @return bool
