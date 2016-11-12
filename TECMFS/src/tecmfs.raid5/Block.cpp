@@ -24,12 +24,11 @@ Block::Block(){
 /**
  * Constructor.
  */
-Block::Block(char name, char path) {
+Block::Block(char name, const char *path) {
 	this->path = path;
 	this->ID = generateID();
 	this->size = 10000000;
 	this->name = name;
-
 	ofstream file(path);
 }
 
@@ -64,7 +63,7 @@ int Block::getSize(){
  *
  * @path
  */
-char Block::getPath(){
+const char * Block::getPath(){
 	return path;
 }
 

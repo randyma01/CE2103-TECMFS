@@ -30,11 +30,11 @@ Disk::Disk() {
 /**
  *
  */
- Disk::Disk(char name, string IP, int port){
+ Disk::Disk(const char * name, string IP, int port){
 	 this->ip = IP;
 	 this->port = port;
 	 this->name = name;
-	 this->pathDirectory = '/home/randy/git/TECMFS/TECMFS/Disk'+name; /*Path of the Directory of the Disk.*/
+	 this->pathDirectory += name; /*Path of the Directory of the Disk.*/
 
 	 mkdir("/home/randy/git/TECMFS/TECMFS/Disk"+name, 0700); /*Make the Directory with the given path*/
 	 const char *pathBlock="/home/randy/git/TECMFS/TECMFS/Disk"+name;
