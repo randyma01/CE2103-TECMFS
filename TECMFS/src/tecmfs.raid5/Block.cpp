@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sstream>
+#include <fstream>
+
 
 /**
  * Constructor.
@@ -26,8 +28,7 @@ Block::Block(){
 Block::Block(string path) {
 	this->path = "/home/randy/git/TECMFS/TECMFS/";
 	this->ID = generateID();
-	//this->size
-	//this->file
+	this->size = 10000000;
 }
 
 /**
@@ -36,6 +37,78 @@ Block::Block(string path) {
 Block::~Block() {
 
 }
+
+
+
+/**
+ * Return the ID of this block.
+ *
+ * @return ID
+ */
+string Block::getID(){
+	return ID;
+}
+
+/**
+ * Return the size of the block file.
+ *
+ * @size
+ */
+int Block::getSize(){
+	return size;
+}
+
+/**
+ * Return the path of the block file.
+ *
+ * @path
+ */
+string Block::getPath(){
+	return path;
+}
+
+
+void Block::saveData(string data){
+	string id = this->getID();
+	ofstream myfile("block"+id+".txt");
+	if (myfile.is_open()){
+		myfile << data << endl;
+		myfile.close();
+	}
+	else cout << "Unable to open file.";
+}
+
+
+
+void Block::readData(){
+	string line;
+	string id = this->getID();
+	ifstream myfile("block"+id+".txt");
+	if (myfile.is_open()){
+		while ( getline (myfile,line)){
+		  cout << line << '\n';
+		}
+		myfile.close();
+	}
+	else cout << "Unable to open file";
+}
+
+
+string Block::getData(){
+	string data,line;
+	string id = this->getID();
+	ifstream myfile("block"+id+".txt");
+	if (myfile.is_open()){
+		while ( getline (myfile,line)){
+			data+=line;
+		}
+		myfile.close();
+	}
+	else cout << "Unable to open file";
+	return data;
+}
+
+
 
 /**
  * Converts an number (int) into a string.
@@ -111,42 +184,5 @@ string Block::generateIDAux(unsigned char const* bytes_to_encode, unsigned int i
 	  return ret;
 }
 
-
-void Block::saveData(string data){
-	 ofstream myfile ("blockA.txt");
-	  if (myfile.is_open())
-	  {
-		myfile << data << endl;
-		myfile.close();
-	  }
-	  else cout << "Unable to open file.";
-}
-
-
-
-//void Block::readData(){
-//	string line;
-//	ifstream blockFile ("block.txt");
-//	if (blockFile.is_open()){
-//		while ( blockFile (blockFile,line)){
-//		  cout << line << '\n';
-//		}
-//		blockFile.close();
-//	}
-//	else cout << "Unable to open file";
-//}
-
-
-string Block::getData(){
-	string data,line;
-	//ifstream blockFile ("example.txt");
-	if (blockFile.is_open()){
-		while ( getline (blockFile,line)){
-			data+=line;
-		}
-		blockFile.close();
-	}
-	else cout << "Unable to open file";
-}
 
 
