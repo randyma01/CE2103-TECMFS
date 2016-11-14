@@ -18,7 +18,7 @@ class Block {
 private:
 	/*Attributes*/
 	string ID; /*Identificator of this Block*/
-	int size; /*Size of the block: bytes.*/
+	int size = 10000000; /*Size of the block: bytes.*/
 	const char * path; /*Path of the location of the save data.*/
 	char name; /*Name of the block.*/
 
@@ -26,8 +26,8 @@ private:
 public:
 	/*Methods*/
 	Block();/*Constructor.*/
-	Block(char name, const char *path); /*Constructorwith the name.*/
-	virtual ~Block(); /*Destoyer.*/
+	Block(char name, const char *path); /*Constructor with the name.*/
+	virtual ~Block(); /*Destroyer.*/
 
 	/*Getters.*/
 	string getID();
@@ -39,9 +39,10 @@ public:
 	void saveData(string data); /*Writes the data on the file.*/
 	void readData(); /*Read the data on th file.*/
 	string getData(); /*Gets the data of the block.*/
-	void clenBlock();; /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-	int checkSizeData(); /*Checks the size of the file.*/
-	bool freeSize(); /*Verifies if there's free space on the file.*/
+	void cleanBlock(); /*Clean the block's file.*/
+	int getSizeData(); /*Checks the size of the file.*/
+	bool checkSizeData(); /*Verifies if there's free space on the file.*/
+	void deleteFile(); /*Deletes the file.*/
 
 
 	/*Auxiliar Functions.*/

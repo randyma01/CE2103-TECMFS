@@ -23,8 +23,37 @@ using namespace std;
 
 int main() {
 	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
-//	 mkdir("/home/randy/holili", 0700);
+//
+	Disk testDisk = Disk('k', "IP", 9080);
+	testDisk.receiveData("holi + lili");
+	testDisk.deleteBlock(testDisk.getVectorBlocks().at(2));
 
+
+//	int myAge = 19;
+//	cout << "Size of int " << sizeof(myAge) << endl;
+
+	//testDisk.deleteBlock(testDisk.getVectorBlocks().at(1));
+
+//	const char *path="/home/randy/git/TECMFS/TECMFS/DiskT/BlockA.txt";
+//	{
+//	  if( remove(path) != 0 )
+//	    perror( "Error deleting file" );
+//	  else
+//	    puts( "File successfully deleted" );
+//	  return 0;
+//	}
+
+	//testDisk.deleteBlock(testDisk.getVectorBlocks().at(0));
+
+	//cout << testDisk.getVectorBlocks().size();
+	//	 mkdir("/home/randy/holili", 0700);
+
+//	long int y = 79;
+//	int x = 1;
+//
+//	long long int z = 2;
+//
+//	cout << x+y+z;
 
 	//Disk testDisk = Disk('k', "IP", 9080);
 

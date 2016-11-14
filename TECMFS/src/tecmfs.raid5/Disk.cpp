@@ -35,12 +35,12 @@ Disk::Disk() {
 	 this->port = port; /*Set Port.*/
 	 this->name = name; /*Set Name.*/
 
-	 mkdir("/home/randy/git/TECMFS/TECMFS/Disk1", 0700); /*Make the Directory with the given path.*/
+	 mkdir("/home/randy/git/TECMFS/TECMFS/DiskT", 0700); /*Make the Directory with the given path.*/
 
-	 const char *pathBlockA="/home/randy/git/TECMFS/TECMFS/Disk1/BlockA.txt"; /*Create the path and the file for the blocks to be saved.*/
-	 const char *pathBlockB="/home/randy/git/TECMFS/TECMFS/Disk1/BlockB.txt"; /*Create the path and the file for the blocks to be saved.*/
-	 const char *pathBlockC="/home/randy/git/TECMFS/TECMFS/Disk1/BlockC.txt"; /*Create the path and the file for the blocks to be saved.*/
-	 const char *pathBlockP="/home/randy/git/TECMFS/TECMFS/Disk1/BlockD.txt"; /*Create the path and the file for the blocks to be saved.*/
+	 const char *pathBlockA="/home/randy/git/TECMFS/TECMFS/DiskT/BlockA.txt"; /*Create the path and the file for the blocks to be saved.*/
+	 const char *pathBlockB="/home/randy/git/TECMFS/TECMFS/DiskT/BlockB.txt"; /*Create the path and the file for the blocks to be saved.*/
+	 const char *pathBlockC="/home/randy/git/TECMFS/TECMFS/DiskT/BlockC.txt"; /*Create the path and the file for the blocks to be saved.*/
+	 const char *pathBlockP="/home/randy/git/TECMFS/TECMFS/DiskT/BlockP.txt"; /*Create the path and the file for the blocks to be saved.*/
 
 
 	 /*Set the blocks.*/
@@ -104,19 +104,61 @@ Block Disk::getBlockP(){
 }
 
 
+void Disk::receiveData(string data){
+	for(int i = 0; i<4; i++){
+		if(this->getVectorBlocks().at(i).checkSizeData() == true ){
+			this->saveDataBlock(data, this->getVectorBlocks().at(i));
+			break;
+		}
+	}
+
+}
 
 
-
-void saveDataBlock(string data, Block block){
+void Disk::saveDataBlock(string data, Block block){
 	  block.saveData(data);
 }
 
 
-//void sendData(Block block); /*Send the data that has in the file.*/
-//bool checkSize(); /*Check if there is free space in the disk. (Checks all blocks)*/
-//int getSizeDick(); /*Returns the actual size of the disk by adding the data from all the blocks..*/
-//void deleteBlock(Block block); /*Delete the desire block with all information related to it.*/
-//void deleteDisc(); /*Delete this disk with all information related to it.*/
+void Disk::sendData(Block block){
+	string data = block.getData();
+	cout << data;
+}
+
+bool Disk::checkSize(){
+	bool answer = false;
+	if (this->getSizeDisk() < 40000000)
+		answer= true;
+	return answer;
+}
+
+
+int Disk::getSizeDisk(){
+	int totalSize;
+	for(int i = 0; i<4;i++){
+		totalSize += this->getVectorBlocks().at(i).getSizeData();
+	}
+	return totalSize;
+}
+
+void Disk::deleteBlock(Block block){
+
+	block.deleteFile();
+	block.~Block();
+//	string blockID = block.getID();
+//	for(int i = 0; i<4;i++){
+//		string vectorBlockID = this->getVectorBlocks().at(i).getID();
+//		if(vectorBlockID == blockID){
+//			this->getVectorBlocks().erase(this->getVectorBlocks().begin()+i);
+//			block.deleteFile();
+//			block.~Block();
+//		}
+//	}
+}
+
+void Disk::deleteDisc(){
+	this->~Disk();
+}
 
 
 

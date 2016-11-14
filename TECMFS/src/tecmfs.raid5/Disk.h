@@ -23,15 +23,15 @@ private:
 	string ip; /*IP number for the Disk.*/
 	int port; /*PORT number of the Disk.*/
 	const char * pathDirectory = "/home/randy/git/TECMFS/TECMFS"; /*Path of the location of the save data.*/
-	char name; /*Name of the disk.*/
-	//vector<Block> blocksVector;/*Vector full of the Blocks of the Disk.*/
+	char name; /*Name of the Disk.*/
+	int size = 40000000; /*Size of the Disk.*/
 
+	vector<Block> vectorBlocks;/*Vector full of the Blocks of the Disk.*/
 	Block blockA; /*First or Block A of the Disk.*/
 	Block blockB; /*Second or Block B of the Disk.*/
 	Block blockC; /*Third or Block C of the Disk.*/
 	Block blockP; /*Fourth or Block P (Parity) of the Disk.*/
 
-	vector<Block> vectorBlocks;/*Vector full of the Blocks of the Disk.*/
 
 
 public:
@@ -63,7 +63,7 @@ public:
 	void saveDataBlock(string data, Block block); /*Save the data into the block.*/
 	void sendData(Block block); /*Send the data that has in the file.*/
 	bool checkSize(); /*Check if there is free space in the disk. (Checks all blocks)*/
-	int getSizeDick(); /*Returns the actual size of the disk by adding the data from all the blocks..*/
+	int getSizeDisk(); /*Returns the actual size of the disk by adding the data from all the blocks.*/
 	void deleteBlock(Block block); /*Delete the desire block with all information related to it.*/
 	void deleteDisc(); /*Delete this disk with all information related to it.*/
 

@@ -36,7 +36,6 @@ Block::Block(char name, const char *path) {
  * Destroyer
  */
 Block::~Block() {
-
 }
 
 
@@ -125,10 +124,23 @@ string Block::getData(){
 	return data;
 }
 
+
+void Block::cleanBlock(){
+	string id = this->getID();
+	const char * path = this->getPath();
+	ofstream myfile(path);
+	if (myfile.is_open()){
+		myfile <<"";
+		myfile.close();
+	}
+	else cout << "Unable to open file.";
+}
+
+
 /**
  * http://www.cplusplus.com/doc/tutorial/files/
  */
-int Block::checkSizeData(){
+int Block::getSizeData(){
 	int fileSize;
 	streampos begin,end;
 	string id = this->getID();
@@ -142,17 +154,23 @@ int Block::checkSizeData(){
 	return fileSize;
 }
 
-bool Block::freeSize(){
+bool Block::checkSizeData(){
 	bool freeSpace = false;
-	int fileSize = this->checkSizeData();
-	if (fileSize<this->getSize())
+	int fileSize = this->getSizeData();
+	if (fileSize < this->getSize())
 		freeSpace = true;
 	return freeSpace;
 
 }
 
-
-
+void Block::deleteFile(){
+	const char * path = this->getPath();
+	if( remove(path)!=0 ){
+		perror( "Error deleting file" );
+	}else{
+		cout << "File successfully deleted" << endl;
+	}
+}
 
 /**
  * Converts an number (int) into a string.
