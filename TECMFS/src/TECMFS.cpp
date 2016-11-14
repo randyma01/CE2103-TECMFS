@@ -17,6 +17,7 @@
 #include <unistd.h>
 
 #include "tecmfs.raid5/Block.h"
+#include "tecmfs.raid5/Disk.h"
 
 using namespace std;
 
@@ -25,6 +26,11 @@ int main() {
 //	 mkdir("/home/randy/holili", 0700);
 
 
+	Disk testDisk = Disk('T', "IP", 9080);
+//
+//	const char *pathBlockA="/home/randy/Disk1/BlockA.txt"; /*Create the path and the file for the blocks to be saved.*/
+//	ofstream file(pathBlockA);
+//	//file << "";
 
 //
 //	Block testingBlock = Block();

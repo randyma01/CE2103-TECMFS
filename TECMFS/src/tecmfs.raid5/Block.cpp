@@ -25,11 +25,11 @@ Block::Block(){
  * Constructor.
  */
 Block::Block(char name, const char *path) {
-	this->path = path;
-	this->ID = generateID();
-	this->size = 10000000;
-	this->name = name;
-	ofstream file(path);
+	this->path = path; /*Set the path for the file, assing from the Disk.*/
+	this->ID = generateID(); /*Set an ID for this ID block.*/
+	this->size = 10000000; /*Set the size of the block, amounts in bytes.*/
+	this->name = name; /*Set the name of the block.*/
+	ofstream file(path); /*Creates a file inside the Disk file.*/
 }
 
 /**
@@ -81,7 +81,8 @@ char Block::getName(){
  */
 void Block::saveData(string data){
 	string id = this->getID();
-	ofstream myfile("block"+id+".txt");
+	const char * path = this->getPath();
+	ofstream myfile(path);
 	if (myfile.is_open()){
 		myfile << data << endl;
 		myfile.close();
@@ -95,7 +96,8 @@ void Block::saveData(string data){
 void Block::readData(){
 	string line;
 	string id = this->getID();
-	ifstream myfile("block"+id+".txt");
+	const char * path = this->getPath();
+	ifstream myfile(path);
 	if (myfile.is_open()){
 		while ( getline (myfile,line)){
 		  cout << line << '\n';
@@ -111,7 +113,8 @@ void Block::readData(){
 string Block::getData(){
 	string data,line;
 	string id = this->getID();
-	ifstream myfile("block"+id+".txt");
+	const char * path = this->getPath();
+	ifstream myfile(path);
 	if (myfile.is_open()){
 		while ( getline (myfile,line)){
 			data+=line;
@@ -129,7 +132,8 @@ int Block::checkSizeData(){
 	int fileSize;
 	streampos begin,end;
 	string id = this->getID();
-	ifstream myfile("block"+id+".txt");
+	const char * path = this->getPath();
+	ifstream myfile(path);
 	begin = myfile.tellg();
 	myfile.seekg (0, ios::end);
 	end = myfile.tellg();

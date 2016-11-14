@@ -23,16 +23,21 @@ private:
 	string ip; /*IP number for the Disk.*/
 	int port; /*PORT number of the Disk.*/
 	const char * pathDirectory = "/home/randy/git/TECMFS/TECMFS"; /*Path of the location of the save data.*/
-	const char * name; /*Name of the disk.*/
-	vector<Block> blocksVector;/*Vector full of the Blocks of the Disk.*/
+	char name; /*Name of the disk.*/
+	//vector<Block> blocksVector;/*Vector full of the Blocks of the Disk.*/
 
+	Block blockA; /*First or Block A of the Disk.*/
+	Block blockB; /*Second or Block B of the Disk.*/
+	Block blockC; /*Third or Block C of the Disk.*/
+	Block blockP; /*Fourth or Block P (Parity) of the Disk.*/
 
 public:
 
+	vector<Block> blocksVector;/*Vector full of the Blocks of the Disk.*/
 
 	/*Methods*/
 	Disk(); /*Constructor.*/
-	Disk(const char * name, string IP, int port); /*+++++++++++++.*/
+	Disk(char name, string IP, int port); /*+++++++++++++.*/
 	virtual ~Disk(); /*Destroyer.*/
 
 	/*Getters*/
@@ -41,6 +46,10 @@ public:
 	const char * getPathDirectory();
 	char getName();
 	vector<Block> getBlocksVector();
+	Block getBlockA();
+	Block getBlockB();
+	Block getBlockC();
+	Block getBlockP();
 
 	/*Setters*/
 	void setIP(string ip);
