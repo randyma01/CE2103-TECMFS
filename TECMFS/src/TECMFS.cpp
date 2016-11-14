@@ -26,7 +26,9 @@ int main() {
 //	 mkdir("/home/randy/holili", 0700);
 
 
-	Disk testDisk = Disk('T', "IP", 9080);
+	//Disk testDisk = Disk('k', "IP", 9080);
+
+	//cout << testDisk.getBlocksVector().size();
 //
 //	const char *pathBlockA="/home/randy/Disk1/BlockA.txt"; /*Create the path and the file for the blocks to be saved.*/
 //	ofstream file(pathBlockA);

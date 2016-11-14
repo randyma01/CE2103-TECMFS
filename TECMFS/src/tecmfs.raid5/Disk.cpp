@@ -50,10 +50,10 @@ Disk::Disk() {
 	 this->blockP = Block('P', pathBlockP); /*Block for the Parity.*/
 
 	 /*Inserting the Blocks into the Vector.*/
-	 blocksVector.push_back(blockA);
-	 blocksVector.push_back(blockB);
-	 blocksVector.push_back(blockC);
-	 blocksVector.push_back(blockP);
+	 vectorBlocks.push_back(blockA);
+	 vectorBlocks.push_back(blockB);
+	 vectorBlocks.push_back(blockC);
+	 vectorBlocks.push_back(blockP);
 
  }
 
@@ -82,8 +82,8 @@ char Disk::getName(){
 	return name;
 }
 
-vector<Block> Disk::getBlocksVector(){
-	return blocksVector;
+vector<Block> Disk::getVectorBlocks(){
+	return vectorBlocks;
 }
 
 
@@ -106,17 +106,9 @@ Block Disk::getBlockP(){
 
 
 
-void receiveData(string data){
-	//vector<Block> vectorBlocks = this.getBlocksVector();
-
-	for(int i = 0; i<=4; i++){
-		blocksVector.at(i).freeSize();
-	}
-}
-
 
 void saveDataBlock(string data, Block block){
-
+	  block.saveData(data);
 }
 
 

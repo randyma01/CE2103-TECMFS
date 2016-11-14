@@ -31,9 +31,10 @@ private:
 	Block blockC; /*Third or Block C of the Disk.*/
 	Block blockP; /*Fourth or Block P (Parity) of the Disk.*/
 
-public:
+	vector<Block> vectorBlocks;/*Vector full of the Blocks of the Disk.*/
 
-	vector<Block> blocksVector;/*Vector full of the Blocks of the Disk.*/
+
+public:
 
 	/*Methods*/
 	Disk(); /*Constructor.*/
@@ -45,7 +46,7 @@ public:
 	int getPort();
 	const char * getPathDirectory();
 	char getName();
-	vector<Block> getBlocksVector();
+	vector<Block> getVectorBlocks();
 	Block getBlockA();
 	Block getBlockB();
 	Block getBlockC();
