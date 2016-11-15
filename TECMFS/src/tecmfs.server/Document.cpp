@@ -8,11 +8,28 @@
 #include "Document.h"
 
 Document::Document() {
-	// TODO Auto-generated constructor stub
-
 }
 
 Document::~Document() {
-	// TODO Auto-generated destructor stub
+}
+
+string Document::getName(){
+	return name;
+}
+
+int Document::getLength(){
+	return length;
+}
+
+int Document::getSize(){
+	return size;
+}
+
+string Document::getOwner(){
+	return owner;
+}
+
+char Document::getDescription(){
+	return description[350];
 }
 
