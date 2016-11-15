@@ -28,6 +28,8 @@ int main() {
 	testDisk.receiveData("holi + lili");
 	testDisk.deleteBlock(testDisk.getVectorBlocks().at(2));
 
+//	2 655 436 982
+//	885 145 660.7
 
 //	int myAge = 19;
 //	cout << "Size of int " << sizeof(myAge) << endl;
