@@ -18,7 +18,6 @@
  *
  */
 Block::Block(){
-
 }
 
 /**
@@ -92,6 +91,7 @@ void Block::saveData(string data){
 /**
  * http://www.cplusplus.com/doc/tutorial/files/
  */
+//CAMBIAR METODO DE LECTURA!!!!!!!!!!!!!!!!!!!!!!!!!1
 void Block::readData(){
 	string line;
 	string id = this->getID();
@@ -109,6 +109,8 @@ void Block::readData(){
 /**
  * http://www.cplusplus.com/doc/tutorial/files/
  */
+//CAMBIAR METODO DE LECTURA!!!!!!!!!!!!!!!!!!!!!!!!!1
+
 string Block::getData(){
 	string data,line;
 	string id = this->getID();

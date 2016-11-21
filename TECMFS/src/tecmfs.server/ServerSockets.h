@@ -36,7 +36,6 @@ public:
 	ServerSockets(); /*Constructor.*/
 	virtual ~ServerSockets(); /*Destructor.*/
 
-	void dostuff(int); /**/
 	void error(const char *msg); /*Control Errors.*/
 	void dostuff (int sock); /*Controls the socket..*/
 	int run(); /*Makes the connection.*/

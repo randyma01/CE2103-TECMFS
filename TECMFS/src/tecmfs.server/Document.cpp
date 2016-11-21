@@ -10,6 +10,10 @@
 Document::Document() {
 }
 
+Document::Document(string name){
+	this->name = name;
+}
+
 Document::~Document() {
 }
 

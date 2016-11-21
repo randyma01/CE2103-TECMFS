@@ -7,6 +7,14 @@
 
 #include "Parity.h"
 
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <stdio.h>
+
+using namespace std;
+
+
 /**
  * Constructor.
  */

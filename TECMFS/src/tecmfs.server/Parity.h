@@ -8,6 +8,11 @@
 #ifndef TECMFS_SERVER_PARITY_H_
 #define TECMFS_SERVER_PARITY_H_
 
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <stdio.h>
+
 using namespace std;
 
 class Parity {

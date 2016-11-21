@@ -43,6 +43,7 @@ public:
 	void deleteData(Document delData); /*Deletes a data from the list.*/
 	void printList();				   /*Print in screen all the data from the list.*/
 	Document getDataX(int x);		   /*Gets a document from a certain position in the list.*/
+	string searchByName(string name); /*Search on the list by the name of the Document.*/
 
 
 };

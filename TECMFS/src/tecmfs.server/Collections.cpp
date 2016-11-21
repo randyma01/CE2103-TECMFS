@@ -8,11 +8,8 @@
 #include "Collections.h"
 
 Collections::Collections() {
-	// TODO Auto-generated constructor stub
-
 }
 
 Collections::~Collections() {
-	// TODO Auto-generated destructor stub
 }
 

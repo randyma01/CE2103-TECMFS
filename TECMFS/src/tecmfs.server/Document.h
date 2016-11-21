@@ -37,7 +37,6 @@ private:
 public:
 	/*Functions.*/
 
-
 	/*Getters.*/
 	string getName();
 	int getLength();
@@ -47,6 +46,7 @@ public:
 
 	/*Methods.*/
 	Document();
+	Document (string name);
 	virtual ~Document();
 };
 

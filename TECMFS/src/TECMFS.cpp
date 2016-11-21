@@ -18,15 +18,37 @@
 
 #include "tecmfs.raid5/Block.h"
 #include "tecmfs.raid5/Disk.h"
+#include "tecmfs.server/DocumentSingleList.h"
+#include "tecmfs.server/Document.h"
+#include "tecmfs.server/Collections.h"
+
+
 
 using namespace std;
 
 int main() {
 	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
-//
-	Disk testDisk = Disk('k', "IP", 9080);
-	testDisk.receiveData("holi + lili");
-	testDisk.deleteBlock(testDisk.getVectorBlocks().at(2));
+
+	Document lo = Document("Lo");
+	Document lu = Document("Lu");
+	Document li = Document("Li");
+	Document la = Document("La");
+
+
+	DocumentSingleList listilla = DocumentSingleList();
+	listilla.insertData(lo);
+	listilla.insertData(lu);
+	listilla.insertData(li);
+	listilla.insertData(la);
+
+	listilla.printList();
+
+
+
+////
+//	Disk testDisk = Disk('k', "IP", 9080);
+//	testDisk.receiveData("holi + lili");
+//	testDisk.deleteBlock(testDisk.getVectorBlocks().at(2));
 
 //	2 655 436 982
 //	885 145 660.7

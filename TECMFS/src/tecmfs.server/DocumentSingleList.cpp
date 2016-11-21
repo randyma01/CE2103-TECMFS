@@ -140,3 +140,14 @@ Document DocumentSingleList::getDataX(int x){
 	}
 	return nodeValue;
 }
+
+
+//
+//string Document::searchByName(string name){
+//	string answer;
+//	Node *temp=head;
+//	Document nodeValue;
+//	return answer;
+
+
+}
