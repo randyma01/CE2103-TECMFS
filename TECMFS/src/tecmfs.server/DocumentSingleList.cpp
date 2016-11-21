@@ -142,12 +142,21 @@ Document DocumentSingleList::getDataX(int x){
 }
 
 
-//
-//string Document::searchByName(string name){
-//	string answer;
-//	Node *temp=head;
-//	Document nodeValue;
-//	return answer;
 
+bool DocumentSingleList::searchByName(string name){
+	bool answer = false;
+	Node *temp=head;
+	Document nodeValue;
 
+	while(temp!=NULL){
+			if (temp->value.getName() == name){
+				cout << temp->value.getName() << endl;
+				answer = true;
+				break;
+			}
+			else{
+				temp=temp->next;
+			}
+		}
+	return answer;
 }

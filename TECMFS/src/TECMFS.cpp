@@ -29,20 +29,26 @@ using namespace std;
 int main() {
 	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
 
-	Document lo = Document("Lo");
-	Document lu = Document("Lu");
-	Document li = Document("Li");
-	Document la = Document("La");
 
 
-	DocumentSingleList listilla = DocumentSingleList();
-	listilla.insertData(lo);
-	listilla.insertData(lu);
-	listilla.insertData(li);
-	listilla.insertData(la);
 
-	listilla.printList();
+//	Document lo = Document("Lo");
+//	Document lu = Document("Lu");
+//	Document li = Document("Li");
+//	Document la = Document("La");
+//
+//
+//	DocumentSingleList listilla = DocumentSingleList();
+//	listilla.insertData(lo);
+//	listilla.insertData(lu);
+//	listilla.insertData(li);
+//	listilla.insertData(la);
+//
+//	listilla.printList();
 
+//	cout << "holili" << endl;
+//	cout << listilla.searchByName("lo");
+//
 
 
 ////

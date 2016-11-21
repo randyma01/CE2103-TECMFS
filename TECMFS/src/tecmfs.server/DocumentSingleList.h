@@ -25,7 +25,7 @@ private:
 	struct Node{			/*Struct for the list.*/
 		Document value;		/*Document.*/
 		Node *next;			/*Node.*/
-		int posc;			/*Position i at the list..*/
+		int posc;			/*Position i at the list.*/
 	};
 
 	int len; /*Legnth of the list.*/
@@ -43,7 +43,7 @@ public:
 	void deleteData(Document delData); /*Deletes a data from the list.*/
 	void printList();				   /*Print in screen all the data from the list.*/
 	Document getDataX(int x);		   /*Gets a document from a certain position in the list.*/
-	string searchByName(string name); /*Search on the list by the name of the Document.*/
+	bool searchByName(string name); /*Search on the list by the name of the Document.*/
 
 
 };

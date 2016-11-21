@@ -30,8 +30,7 @@ private:
 	int size; /*(Size (bytes) of the Video. ).*/
 	string owner; /*Name of the owner of the Video.*/
 	char description[350]; /*Small description of the Video.*/
-
-	string Disk; /**/
+//	string Disk; /**/
 
 
 public:
