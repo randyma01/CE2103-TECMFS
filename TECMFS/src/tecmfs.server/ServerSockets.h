@@ -27,7 +27,11 @@
 
 
 using namespace std;
-
+/**
+ * Server Sockets is a class that manages the connecions
+ * and the data transfer through it. It connects the
+ * Odissey Media Player and the Disk Node.
+ */
 class ServerSockets {
 
 

@@ -21,6 +21,12 @@
 
 using namespace std;
 
+/**
+ * Document class, is a register NOSQL alike. Each new video
+ * upload creates a new instantes of this class with the basic
+ * information of the video.
+ *
+ */
 class Document {
 
 private:
@@ -34,7 +40,10 @@ private:
 
 
 public:
-	/*Functions.*/
+	/*Methods.*/
+	Document(); /*Consturctor.*/
+	Document (string name); /*Destoyer.*/
+	virtual ~Document();
 
 	/*Getters.*/
 	string getName();
@@ -43,10 +52,6 @@ public:
 	string getOwner();
 	char getDescription();
 
-	/*Methods.*/
-	Document();
-	Document (string name);
-	virtual ~Document();
 };
 
 #endif /* TECMFS_SERVER_DOCUMENT_H_ */

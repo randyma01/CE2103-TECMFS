@@ -29,8 +29,12 @@ using namespace std;
 int main() {
 	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
 
+	Disk testDisk = Disk('A', "IP", 9080);
+	testDisk.receiveData("holi + lili");
 
 
+
+	//************ESCRIBIR XML Y LEERLO COMO PARAMETROS PARA LA CONEXCION
 
 //	Document lo = Document("Lo");
 //	Document lu = Document("Lu");

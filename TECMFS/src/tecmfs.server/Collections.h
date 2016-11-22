@@ -21,13 +21,17 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-
 using namespace std;
 
+/**
+ *A Collection stand as a group of Document. This class
+ *manages a series Documents saving them on a Single
+ *Linked List.
+ */
 class Collections {
 
 private:
-	/*Attributos*/
+	/*Attributes*/
 	DocumentSingleList  documentList; /*Single List for managing all the Documents.*/
 	string name = "Collection."; /*Set the name of the Collection.*/
 
@@ -46,6 +50,7 @@ public:
 	void addDocument(Document newValue); /*Insert a new document in the Collection's List.*/
 	void deleteDocument(Document delData); /*Delete a Document inside the Collection's List.*/
 	void printCollection(); /*Prints the entire Collection's List.*/
+	Document searchDocument(string name); /*Searches a Document inside the list.*/
 
 };
 

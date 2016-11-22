@@ -16,12 +16,14 @@
 
 using namespace std;
 
-
+/**
+ * Singly Linked List class. Implemented only for
+ * Document objects. Contains the basic data of it.
+ */
 class DocumentSingleList {
 
 private:
 	/*Attributes.*/
-
 	struct Node{			/*Struct for the list.*/
 		Document value;		/*Document.*/
 		Node *next;			/*Node.*/
@@ -34,27 +36,18 @@ private:
 
 public:
 	/*Methods.*/
-
-	DocumentSingleList();  		  /*Constructor,*/
+	DocumentSingleList(); /*Constructor.*/
 	virtual ~DocumentSingleList(); /*Destroyer.*/
 
 	/*Basic functions.*/
 	void insertData(Document addData); /*.Insert a new data to the list.*/
 	void deleteData(Document delData); /*Deletes a data from the list.*/
-	void printList();				   /*Print in screen all the data from the list.*/
-	Document getDataX(int x);		   /*Gets a document from a certain position in the list.*/
+	void printList(); /*Print in screen all the data from the list.*/
+	Document getDataX(int x); /*Gets a document from a certain position in the list.*/
 	bool searchByName(string name); /*Search on the list by the name of the Document.*/
 
 
 };
-
-
-
-
-
-
-
-
 #endif /* TECMFS_SERVER_DOCUMENTSINGLELIST_H_ */
 
 
