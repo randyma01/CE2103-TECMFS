@@ -29,8 +29,27 @@ using namespace std;
 int main() {
 	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
 
-	Disk testDisk = Disk('A', "IP", 9080);
-	testDisk.receiveData("holi + lili");
+	string line;
+	string info;
+
+	const char * path = "/home/randy/git/TECMFS/TECMFS/InformationNode.xml";
+
+	ifstream myfile(path);
+
+	char c;
+
+	if (myfile.is_open()){
+		while ( getline (myfile,line)){
+			 //cout << line << '\n';
+			 if (line == "<IP>"){
+				 myfile.get(c);
+				cout << c << endl;
+			 }
+		}
+		myfile.close();
+	}
+	else cout << "Unable to open file";
+
 
 
 
