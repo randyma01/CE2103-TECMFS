@@ -36,14 +36,18 @@ void ServerSockets::error(const char *msg){
 }
 
 void ServerSockets::dostuff (int sock){
-   int n;
-   char buffer[256];
-   bzero(buffer,256);
-   n = read(sock,buffer,255);
-   if (n < 0) error("ERROR reading from socket");
-   printf("Here is the message: %s\n",buffer);
-   n = write(sock,"I got your message",18);
-   if (n < 0) error("ERROR writing to socket");
+	int n;
+	char * buffer;//char buffer[256];
+	bzero(buffer,256);
+	n = read(sock,buffer,99999999);
+	if (n < 0) error("ERROR reading from socket");
+
+	printf("Here is the message: %s\n",buffer);
+
+	cout << buffer << endl;
+
+	n = write(sock,"I got your message",18);
+	if (n < 0) error("ERROR writing to socket");
 }
 
 
@@ -82,7 +86,7 @@ int ServerSockets::run(){
 	 *  -> lo
 	 *
 	 */
-	strncpy(ifr.ifr_name, "wlp2s0", IFNAMSIZ-1);
+	strncpy(ifr.ifr_name, "wlp3s0", IFNAMSIZ-1);
 	ioctl(sockfd, SIOCGIFADDR, &ifr);
 	cout << "Server IP: " << (inet_ntoa(((struct sockaddr_in *)&ifr.ifr_addr)->sin_addr)) << endl;
 	cout << "Server Port: " << (portno) << endl;

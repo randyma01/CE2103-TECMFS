@@ -105,7 +105,7 @@ Block Disk::getBlockP(){
 
 
 void Disk::receiveData(string data){
-	for(int i = 0; i<4; i++){
+	for(int i = 0; i<3; i++){
 		if(this->getVectorBlocks().at(i).checkSizeData() == true ){
 			this->saveDataBlock(data, this->getVectorBlocks().at(i));
 			break;

@@ -21,6 +21,7 @@
 #include "tecmfs.server/DocumentSingleList.h"
 #include "tecmfs.server/Document.h"
 #include "tecmfs.server/Collections.h"
+#include "tecmfs.server/ServerSockets.h"
 
 
 
@@ -29,28 +30,48 @@ using namespace std;
 int main() {
 	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
 
-	string line;
-	string info;
 
-	const char * path = "/home/randy/git/TECMFS/TECMFS/InformationNode.xml";
+	ServerSockets holili = ServerSockets();
 
-	ifstream myfile(path);
-
-	char c;
-
-	if (myfile.is_open()){
-		while ( getline (myfile,line)){
-			 //cout << line << '\n';
-			 if (line == "<IP>"){
-				 myfile.get(c);
-				cout << c << endl;
-			 }
-		}
-		myfile.close();
-	}
-	else cout << "Unable to open file";
+	holili.run();
 
 
+//
+//	string holilili;
+//	char jojo = 'je';
+//
+//	holilili += jojo;
+//	holilili += jojo++;
+//
+//	cout << holilili;
+
+	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+	//string line;
+//	string info;
+//
+//	const char * path = "/home/randy/git/TECMFS/TECMFS/InformationNode.xml";
+//
+//	ifstream myfile(path);
+//
+//	char c;
+
+//	if (myfile.is_open()){
+//		while ( getline (myfile,line)){
+//			 //cout << line << '\n';
+//			 if (line == "<IP>"){
+//				 myfile.get(c);
+//				 if (c == '1' or c =='2' or c =='3' or c =='4' or c =='5' or c =='6' or c =='7'orc =='8'or =='9' or c =='0'){
+//					 info +=c;
+//				 }
+//				cout << c << endl;
+//			 }
+//		}
+//		myfile.close();
+//	}
+//	else cout << "Unable to open file";
+
+//	cout << info;
 
 
 	//************ESCRIBIR XML Y LEERLO COMO PARAMETROS PARA LA CONEXCION
@@ -72,8 +93,6 @@ int main() {
 //	cout << "holili" << endl;
 //	cout << listilla.searchByName("lo");
 //
-
-
 ////
 //	Disk testDisk = Disk('k', "IP", 9080);
 //	testDisk.receiveData("holi + lili");
@@ -123,9 +142,6 @@ int main() {
 //	testingBlock.saveData("1100101010101010101010100001");
 //
 //	testingBlock.readData();
-
-
-
 	return 0;
 }
 
