@@ -59,7 +59,7 @@ string ControllerNode::fillOnes(string str,int cant){
  * @param a string, b string
  * @return parity string
  */
-string ControllerNode::createParity(string a,string b){
+string ControllerNode::superXOR(string a,string b){
 	if (a.length() > b.length()){
 		b= fillOnes(b,  (a.length()- b.length()) );
 	}
@@ -76,3 +76,13 @@ string ControllerNode::createParity(string a,string b){
 	return resp;
 }
 
+/**
+ *
+ */
+string ControllerNode::parityMgmt(string a, string b, string c){
+	string d;
+	d=superXOR(a,b);
+	d=superXOR(a,d);
+	return d;
+
+}

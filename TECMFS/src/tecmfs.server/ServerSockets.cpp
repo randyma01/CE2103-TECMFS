@@ -23,6 +23,9 @@
 #include <string>
 #include <cstdlib>
 
+
+string msjCom;
+
 ServerSockets::ServerSockets() {
 }
 
@@ -37,17 +40,18 @@ void ServerSockets::error(const char *msg){
 
 void ServerSockets::dostuff (int sock){
 	int n;
-	char * buffer;//char buffer[256];
+	char buffer[10];//char * buffer;//char buffer[256];
 	bzero(buffer,256);
 	n = read(sock,buffer,99999999);
 	if (n < 0) error("ERROR reading from socket");
 
-	printf("Here is the message: %s\n",buffer);
-
-	cout << buffer << endl;
+	//printf("Here is the message: %s\n",buffer);
+	//cout << buffer << endl;
 
 	n = write(sock,"I got your message",18);
 	if (n < 0) error("ERROR writing to socket");
+
+	msjCom +=buffer;
 }
 
 
