@@ -12,33 +12,183 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sstream>
+#include <fstream>
+
+/**
+ *
+ */
+Block::Block(){
+}
 
 /**
  * Constructor.
  */
-Block::Block(){
-
-}
-
-/**
- * Constructor with the path.
- */
-Block::Block(string path) {
-	this->path = "/home/randy/git/TECMFS/TECMFS/";
-	this->ID = generateID();
-	//this->size
-	//this->file
+Block::Block(char name, const char *path) {
+	this->path = path; /*Set the path for the file, assing from the Disk.*/
+	this->ID = generateID(); /*Set an ID for this ID block.*/
+	this->size = 10000000; /*Set the size of the block, amounts in bytes.*/
+	this->name = name; /*Set the name of the block.*/
+	ofstream file(path); /*Creates a file inside the Disk file.*/
 }
 
 /**
  * Destroyer
  */
 Block::~Block() {
+}
 
+
+/**
+ * Return the ID of this block.
+ *
+ * @return ID
+ */
+string Block::getID(){
+	return ID;
+}
+
+/**
+ * Return the size of the block file.
+ *
+ * @size
+ */
+int Block::getSize(){
+	return size;
+}
+
+/**
+ * Return the path of the block file.
+ *
+ * @path
+ */
+const char * Block::getPath(){
+	return path;
+}
+
+/**
+ * Return the name of the block.
+ *
+ * @path
+ */
+char Block::getName(){
+	return name;
+}
+
+/**
+ * http://www.cplusplus.com/doc/tutorial/files/
+ */
+void Block::saveData(string data){
+	string id = this->getID();
+	const char * path = this->getPath();
+	fstream myfile(path, fstream::in|fstream::out|fstream::app);
+	if (myfile.is_open()){
+		myfile << data << endl;
+		myfile.close();
+	}
+	else cout << "Unable to open file.";
+}
+
+/**
+ * http://www.cplusplus.com/doc/tutorial/files/
+ */
+//CAMBIAR METODO DE LECTURA!!!!!!!!!!!!!!!!!!!!!!!!!1
+void Block::readData(){
+	string line;
+	string id = this->getID();
+	const char * path = this->getPath();
+	ifstream myfile(path);
+	if (myfile.is_open()){
+		while ( getline (myfile,line)){
+		  cout << line << '\n';
+		}
+		myfile.close();
+	}
+	else cout << "Unable to open file";
+}
+
+/**
+ * http://www.cplusplus.com/doc/tutorial/files/
+ */
+//CAMBIAR METODO DE LECTURA!!!!!!!!!!!!!!!!!!!!!!!!!1
+
+string Block::getData(){
+	string data,line;
+	string id = this->getID();
+	const char * path = this->getPath();
+	ifstream myfile(path);
+	if (myfile.is_open()){
+		while ( getline (myfile,line)){
+			data+=line;
+		}
+		myfile.close();
+	}
+	else cout << "Unable to open file";
+	return data;
+}
+
+
+void Block::cleanBlock(){
+	string id = this->getID();
+	const char * path = this->getPath();
+	ofstream myfile(path);
+	if (myfile.is_open()){
+		myfile <<"";
+		myfile.close();
+	}
+	else cout << "Unable to open file.";
+}
+
+
+/**
+ * http://www.cplusplus.com/doc/tutorial/files/
+ */
+int Block::getSizeData(){
+	const char * path = this->getPath();
+	ifstream fileToCompress(path);
+	streampos size;
+	char *data;
+	size = fileToCompress.tellg();
+	data = new char[size];
+	fileToCompress.seekg(0, ios::beg);
+	fileToCompress.read(data,size);
+	fileToCompress.close();
+	delete []data;
+	return (int)size;
+//	int fileSize;
+//	streampos begin,end;
+//	string id = this->getID();
+//	const char * path = this->getPath();
+//	ifstream myfile(path);
+//	begin = myfile.tellg();
+//	myfile.seekg (0, ios::end);
+//	end = myfile.tellg();
+//	myfile.close();
+//	fileSize = (end-begin);
+//	return fileSize;
+}
+
+bool Block::checkSizeData(){
+	bool freeSpace = false;
+	//int fileSize = this->getSizeData();
+	if (this->size > this->getSizeData())
+		freeSpace = true;
+	return freeSpace;
+
+}
+
+void Block::deleteFile(){
+	const char * path = this->getPath();
+	if( remove(path)!=0 ){
+		perror( "Error deleting file" );
+	}else{
+		cout << "File successfully deleted" << endl;
+	}
 }
 
 /**
  * Converts an number (int) into a string.
+ *
+ * http://stackoverflow.com/questions/5590381/easiest-way-to-convert-int-to-string-in-c
  *
  * @param <T> number
  * @return bool
@@ -111,42 +261,5 @@ string Block::generateIDAux(unsigned char const* bytes_to_encode, unsigned int i
 	  return ret;
 }
 
-
-void Block::saveData(string data){
-	 ofstream myfile ("blockA.txt");
-	  if (myfile.is_open())
-	  {
-		myfile << data << endl;
-		myfile.close();
-	  }
-	  else cout << "Unable to open file.";
-}
-
-
-
-void Block::readData(){
-	string line;
-	//ifstream blockFile ("block.txt");
-	if (blockFile.is_open()){
-		while ( blockFile (blockFile,line)){
-		  cout << line << '\n';
-		}
-		blockFile.close();
-	}
-	else cout << "Unable to open file";
-}
-
-
-string Block::getData(){
-	string data,line;
-	//ifstream blockFile ("example.txt");
-	if (blockFile.is_open()){
-		while ( getline (blockFile,line)){
-			data+=line;
-		}
-		blockFile.close();
-	}
-	else cout << "Unable to open file";
-}
 
 

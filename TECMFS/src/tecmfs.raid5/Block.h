@@ -14,37 +14,42 @@
 using namespace std;
 
 class Block {
-public:
 
+private:
 	/*Attributes*/
-	ifstream blockFile = ("aiuuudaaaaaa");
 	string ID; /*Identificator of this Block*/
-	int size = 20000; /*Size of the block: bytes.*/
-	string path; /*Path of the location of the save data.*/
+	int size = 10000000; /*Size of the block: bytes.*/
+	const char * path; /*Path of the location of the save data.*/
+	char name; /*Name of the block.*/
 
-	Block(); /*Constructor.*/
-	Block(string Path); /*Constructor with the path.*/
-	virtual ~Block(); /*Destoyer.*/
 
-	/*Getters of the attributes.*/
+public:
+	/*Methods*/
+	Block();/*Constructor.*/
+	Block(char name, const char *path); /*Constructor with the name.*/
+	virtual ~Block(); /*Destroyer.*/
+
+	/*Getters.*/
 	string getID();
 	int getSize();
-	string getPath();
+	const char * getPath();
+	char getName();
 
-	/*Methods*/
+	/*Functions for the Block.*/
 	void saveData(string data); /*Writes the data on the file.*/
 	void readData(); /*Read the data on th file.*/
-	void checkSize(); /*Checks the size of the file.*/
-	bool maxSize(); /*Verifies if there's free space on the file.*/
 	string getData(); /*Gets the data of the block.*/
+	void cleanBlock(); /*Clean the block's file.*/
+	int getSizeData(); /*Checks the size of the file.*/
+	bool checkSizeData(); /*Verifies if there's free space on the file.*/
+	void deleteFile(); /*Deletes the file.*/
 
 
+	/*Auxiliar Functions.*/
 	string generateID(); /*Generate a coded string as an ID.*/
 	string generateIDAux(unsigned char const* bytes_to_encode, unsigned int in_len); /*Generate a coded string as an ID*/
-
 	template <typename T>
 	string NumberToString ( T Number ); /*Converts an integer into strings.*/
-
 	string base64_chars =
 				   	   	   	 "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 							 "abcdefghijklmnopqrstuvwxyz"

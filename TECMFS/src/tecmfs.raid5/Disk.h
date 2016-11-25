@@ -9,35 +9,63 @@
 #define TECMFS_RAID5_DISK_H_
 
 #include "Block.h"
+
 #include <iostream>
 #include <fstream>
+#include <vector>
 
 using namespace std;
 
 class Disk {
-public:
 
-	/*Atributes*/
-	char ID; /*Identificator of this disk.*/
+private:
+	/*Attributes*/
 	string ip; /*IP number for the Disk.*/
 	int port; /*PORT number of the Disk.*/
-	string pathDirectory; /*Path of the location of the save data.*/
+	const char * pathDirectory = "/home/randy/git/TECMFS/TECMFS"; /*Path of the location of the save data.*/
+	char name; /*Name of the Disk.*/
+	int size = 40000000; /*Size of the Disk.*/
 
-//	Block blockA = Block(); /*Block A.*/
-//	Block blockB = Block(); /*Block A.*/
-//	Block blockC = Block(); /*Block A.*/
-//	Block blockP = Block(); /*Block for the Parity.*/
+	vector<Block> vectorBlocks;/*Vector full of the Blocks of the Disk.*/
+	Block blockA; /*First or Block A of the Disk.*/
+	Block blockB; /*Second or Block B of the Disk.*/
+	Block blockC; /*Third or Block C of the Disk.*/
+	Block blockP; /*Fourth or Block P (Parity) of the Disk.*/
 
-	void receiveData(); /*Receive and save data into the file.*/
-	void sendData(); /*Send the data that has in the file.*/
-	bool hasData(); /*Check if the bile is busy.*/
-	bool maxSize(); /*Check if there is free space.*/
-	int checkSize(); /*Check the actual size of the file.*/
 
+
+public:
+
+	/*Methods*/
 	Disk(); /*Constructor.*/
-	//Disk();
+	Disk(char name, string IP, int port); /*+++++++++++++.*/
 	virtual ~Disk(); /*Destroyer.*/
 
+	/*Getters*/
+	string getIP();
+	int getPort();
+	const char * getPathDirectory();
+	char getName();
+	vector<Block> getVectorBlocks();
+	Block getBlockA();
+	Block getBlockB();
+	Block getBlockC();
+	Block getBlockP();
+
+	/*Setters*/
+	void setIP(string ip);
+	void setPort(int port);
+	void setPath(char path);
+	void setName(char name);
+
+	/*Functions of the disk.*/
+	void receiveData(string data); /*Receive and save data into the file.*/
+	void saveDataBlock(string data, Block block); /*Save the data into the block.*/
+	void sendData(Block block); /*Send the data that has in the file.*/
+	bool checkSize(); /*Check if there is free space in the disk. (Checks all blocks)*/
+	int getSizeDisk(); /*Returns the actual size of the disk by adding the data from all the blocks.*/
+	void deleteBlock(Block block); /*Delete the desire block with all information related to it.*/
+	void deleteDisc(); /*Delete this disk with all information related to it.*/
 
 };
 
