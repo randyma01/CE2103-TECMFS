@@ -169,6 +169,7 @@ string ServerSockets::receiveMSG(int socketClient){
 
 	string message;
 	message = buffer;
+	cout << message << endl;
 	return message;
 
 	//cout << "bytes received: " << r << endl;

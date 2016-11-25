@@ -30,20 +30,24 @@ using namespace std;
 int main() {
 	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
 
-	ControllerNode bana;
 
-	string A = "110101";
-	string B = "111111";
-	string C = "010101";
-	string paridadTemporal = bana.superXOR(A,B);
-	string paridadFinal = bana.superXOR(paridadTemporal,C);
+	ServerSockets controllerS;
+	controllerS.run();
 
-	Disk disco = Disk('G');
-
-	disco.saveDataBlock(A, 0);
-	disco.saveDataBlock(B, 1);
-	disco.saveDataBlock(C, 2);
-	disco.saveDataBlock(paridadTemporal, 3);
+//	ControllerNode bana;
+//
+//	string A = "110101";
+//	string B = "111111";
+//	string C = "010101";
+//	string paridadTemporal = bana.superXOR(A,B);
+//	string paridadFinal = bana.superXOR(paridadTemporal,C);
+//
+//	Disk disco = Disk('G');
+//
+//	disco.saveDataBlock(A, 0);
+//	disco.saveDataBlock(B, 1);
+//	disco.saveDataBlock(C, 2);
+//	disco.saveDataBlock(paridadTemporal, 3);
 
 
 //
