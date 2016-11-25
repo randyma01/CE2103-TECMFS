@@ -91,7 +91,6 @@ void Block::saveData(string data){
 /**
  * http://www.cplusplus.com/doc/tutorial/files/
  */
-//CAMBIAR METODO DE LECTURA!!!!!!!!!!!!!!!!!!!!!!!!!1
 void Block::readData(){
 	string line;
 	string id = this->getID();
@@ -143,28 +142,17 @@ void Block::cleanBlock(){
  * http://www.cplusplus.com/doc/tutorial/files/
  */
 int Block::getSizeData(){
+	int fileSize;
+	streampos begin,end;
+	string id = this->getID();
 	const char * path = this->getPath();
-	ifstream fileToCompress(path);
-	streampos size;
-	char *data;
-	size = fileToCompress.tellg();
-	data = new char[size];
-	fileToCompress.seekg(0, ios::beg);
-	fileToCompress.read(data,size);
-	fileToCompress.close();
-	delete []data;
-	return (int)size;
-//	int fileSize;
-//	streampos begin,end;
-//	string id = this->getID();
-//	const char * path = this->getPath();
-//	ifstream myfile(path);
-//	begin = myfile.tellg();
-//	myfile.seekg (0, ios::end);
-//	end = myfile.tellg();
-//	myfile.close();
-//	fileSize = (end-begin);
-//	return fileSize;
+	ifstream myfile(path);
+	begin = myfile.tellg();
+	myfile.seekg (0, ios::end);
+	end = myfile.tellg();
+	myfile.close();
+	fileSize = (end-begin);
+	return fileSize;
 }
 
 bool Block::checkSizeData(){

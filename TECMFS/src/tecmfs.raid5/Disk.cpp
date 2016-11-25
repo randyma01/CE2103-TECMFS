@@ -30,9 +30,8 @@ Disk::Disk() {
 /**
  *Constructor.
  */
- Disk::Disk(char name, string IP, int port){
-	 this->ip = IP; /*Set IP.*/
-	 this->port = port; /*Set Port.*/
+ Disk::Disk(char name){
+	 //this->readXMLConfig(); /*Sets the port and IP.*/
 	 this->name = name; /*Set Name.*/
 
 	 mkdir("/home/randy/git/TECMFS/TECMFS/DiskT", 0700); /*Make the Directory with the given path.*/
@@ -64,61 +63,108 @@ Disk::Disk() {
 Disk::~Disk() {
 }
 
-
+/**
+ * Return the IP number of the Disk.
+ *
+ * @return ip string
+ */
 string Disk::getIP(){
 	return ip;
 }
 
+/**
+ * Return the Port number of the Disk.
+ *
+ * @return port int
+ */
 int Disk::getPort(){
 	return port;
 }
 
-
+/**
+ * Return the path of the directory where is
+ * the file saved.
+ *
+ * @return pathDirectory const char*
+ */
 const char * Disk::getPathDirectory(){
 	return pathDirectory;
 }
 
+/**
+ * Return the name of the Disk.
+ *
+ * @return name char
+ */
 char Disk::getName(){
 	return name;
 }
 
+
+/**
+ * Return the the vector that contains all the
+ * Blocks that made up the Disk.
+ *
+ * @return vectorBlocks vector<Blocks>
+ */
 vector<Block> Disk::getVectorBlocks(){
 	return vectorBlocks;
 }
 
-
+/**
+ * Return the Block A of the Disk.
+ *
+ * @return blockA Block
+ */
 Block Disk::getBlockA(){
 	return blockA;
 }
 
+/**
+ * Return the Block B of the Disk.
+ *
+ * @return blockB Block
+ */
 Block Disk::getBlockB(){
 	return blockB;
 }
 
+/**
+ * Return the Block C of the Disk.
+ *
+ * @return blockC Block
+ */
 Block Disk::getBlockC(){
 	return blockC;
 }
 
+/**
+ * Return the Block P of the Disk.
+ *
+ * @return blockP Block
+ */
 Block Disk::getBlockP(){
 	return blockP;
 }
 
 
-void Disk::receiveData(string data){
-	for(int i = 0; i<3; i++){
-		if(this->getVectorBlocks().at(i).checkSizeData() == true ){
-			this->saveDataBlock(data, this->getVectorBlocks().at(i));
-			break;
-		}
-	}
+
+void Disk::readXMLConfig(){
 
 }
 
-
-void Disk::saveDataBlock(string data, Block block){
-	  block.saveData(data);
+/**
+ *
+ */
+void Disk::saveDataBlock(string data, int i){
+	vectorBlocks.at(i).saveData(data);
 }
 
+
+void Disk::saveParity(string parity){
+	vectorBlocks.at(4).saveData(parity);
+
+}
 
 void Disk::sendData(Block block){
 	string data = block.getData();

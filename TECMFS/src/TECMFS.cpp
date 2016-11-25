@@ -29,21 +29,32 @@ using namespace std;
 int main() {
 	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
 
+	string gold;
 
-//	ServerSockets holili = ServerSockets();
-//	holili.run();
+	for (int i = 0; i<250; i++){
+		gold += "C";
+	}
+
+	cout << gold.length() << endl;
+
+	gold += "·";
 
 
+
+
+//	const char * path = "/home/randy/git/TECMFS/TECMFS/DiskT/BlockA.txt";
 //
-//	string holilili;
-//	char jojo = 'je';
 //
-//	holilili += jojo;
-//	holilili += jojo++;
-//
-//	cout << holilili;
+//	int fileSize;
+//	streampos begin,end;
+//	ifstream myfile(path);
+//	begin = myfile.tellg();
+//	myfile.seekg (0, ios::end);
+//	end = myfile.tellg();
+//	myfile.close();
+//	fileSize = (end-begin);
+//	cout << fileSize;
 
-	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	//string line;
 //	string info;
@@ -69,77 +80,6 @@ int main() {
 //	}
 //	else cout << "Unable to open file";
 
-//	cout << info;
-
-
-	//************ESCRIBIR XML Y LEERLO COMO PARAMETROS PARA LA CONEXCION
-
-//	Document lo = Document("Lo");
-//	Document lu = Document("Lu");
-//	Document li = Document("Li");
-//	Document la = Document("La");
-//
-//
-//	DocumentSingleList listilla = DocumentSingleList();
-//	listilla.insertData(lo);
-//	listilla.insertData(lu);
-//	listilla.insertData(li);
-//	listilla.insertData(la);
-//
-//	listilla.printList();
-
-//	cout << "holili" << endl;
-//	cout << listilla.searchByName("lo");
-//
-////
-//	Disk testDisk = Disk('k', "IP", 9080);
-//	testDisk.receiveData("holi + lili");
-//	testDisk.deleteBlock(testDisk.getVectorBlocks().at(2));
-
-//	2 655 436 982
-//	885 145 660.7
-
-//	int myAge = 19;
-//	cout << "Size of int " << sizeof(myAge) << endl;
-
-	//testDisk.deleteBlock(testDisk.getVectorBlocks().at(1));
-
-//	const char *path="/home/randy/git/TECMFS/TECMFS/DiskT/BlockA.txt";
-//	{
-//	  if( remove(path) != 0 )
-//	    perror( "Error deleting file" );
-//	  else
-//	    puts( "File successfully deleted" );
-//	  return 0;
-//	}
-
-	//testDisk.deleteBlock(testDisk.getVectorBlocks().at(0));
-
-	//cout << testDisk.getVectorBlocks().size();
-	//	 mkdir("/home/randy/holili", 0700);
-
-//	long int y = 79;
-//	int x = 1;
-//
-//	long long int z = 2;
-//
-//	cout << x+y+z;
-
-	//Disk testDisk = Disk('k', "IP", 9080);
-
-	//cout << testDisk.getBlocksVector().size();
-//
-//	const char *pathBlockA="/home/randy/Disk1/BlockA.txt"; /*Create the path and the file for the blocks to be saved.*/
-//	ofstream file(pathBlockA);
-//	//file << "";
-
-//
-//	Block testingBlock = Block();
-//	cout << testingBlock.getID() <<endl;
-//
-//	testingBlock.saveData("1100101010101010101010100001");
-//
-//	testingBlock.readData();
 	return 0;
 }
 

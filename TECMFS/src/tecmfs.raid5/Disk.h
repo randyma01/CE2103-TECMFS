@@ -38,7 +38,7 @@ public:
 
 	/*Methods*/
 	Disk(); /*Constructor.*/
-	Disk(char name, string IP, int port); /*+++++++++++++.*/
+	Disk(char name); /*+++++++++++++.*/
 	virtual ~Disk(); /*Destroyer.*/
 
 	/*Getters*/
@@ -59,8 +59,10 @@ public:
 	void setName(char name);
 
 	/*Functions of the disk.*/
-	void receiveData(string data); /*Receive and save data into the file.*/
-	void saveDataBlock(string data, Block block); /*Save the data into the block.*/
+	string cutData(string data); /*.*/
+	void readXMLConfig(); /*Reads the XML for the IP and the path for the Disk.*/
+	void saveDataBlock(string data, int i); /*Save the data into the block.*/
+	void saveParity(string parity); /*Sava the parity.*/
 	void sendData(Block block); /*Send the data that has in the file.*/
 	bool checkSize(); /*Check if there is free space in the disk. (Checks all blocks)*/
 	int getSizeDisk(); /*Returns the actual size of the disk by adding the data from all the blocks.*/
