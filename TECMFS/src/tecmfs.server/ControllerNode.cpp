@@ -77,7 +77,12 @@ string ControllerNode::superXOR(string a,string b){
 }
 
 /**
+ *Parity Management (Mgmt) help to recover the data
+ *by using the parity of the data stored. Is must receive
+ *by three pieces of data in order to found the missing.
  *
+ *@param a string, b string, c string
+ *@return d string
  */
 string ControllerNode::parityMgmt(string a, string b, string c){
 	string d;
