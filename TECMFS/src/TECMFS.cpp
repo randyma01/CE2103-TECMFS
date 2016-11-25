@@ -18,7 +18,6 @@
 
 #include "tecmfs.raid5/Block.h"
 #include "tecmfs.raid5/Disk.h"
-#include "tecmfs.server/DocumentSingleList.h"
 #include "tecmfs.server/Document.h"
 #include "tecmfs.server/Collections.h"
 #include "tecmfs.server/ServerSockets.h"
@@ -31,8 +30,8 @@ int main() {
 	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
 
 
-	ServerSockets holili = ServerSockets();
-	holili.run();
+//	ServerSockets holili = ServerSockets();
+//	holili.run();
 
 
 //

@@ -1,115 +1,161 @@
 /*
- * Sockets.cpp
+ * ServerSockets.cpp
  *
- *  Created on: Nov 21, 2016
- *      Author: randy
+ *  Created on: 10 nov. 2016
+ *      Author: gustavo, randy, fernanda, ricardo
  */
 
 #include "ServerSockets.h"
 
-#include <netinet/in.h>
-#include <netdb.h>
-#include <unistd.h>
-#include <sys/socket.h>
-#include <sys/un.h>
-#include <sys/ioctl.h>
-#include <sys/stat.h>
-#include <net/if.h>
-#include <errno.h>
-#include <ifaddrs.h>
-#include <arpa/inet.h>
-#include <stdlib.h>
-#include <iostream>
-#include <string>
-#include <cstdlib>
-
-
-string msjCom;
+vector<int> socketNode;
+vector<string> dataVideo;
 
 ServerSockets::ServerSockets() {
-}
-
-ServerSockets::~ServerSockets() {
-}
-
-
-void ServerSockets::error(const char *msg){
-    perror(msg);
-    exit(1);
-}
-
-void ServerSockets::dostuff (int sock){
-	int n;
-	char buffer[10];//char * buffer;//char buffer[256];
-	bzero(buffer,256);
-	n = read(sock,buffer,99999999);
-	if (n < 0) error("ERROR reading from socket");
-
-	//printf("Here is the message: %s\n",buffer);
-	//cout << buffer << endl;
-
-	n = write(sock,"I got your message",18);
-	if (n < 0) error("ERROR writing to socket");
-
-	msjCom +=buffer;
-}
-
-
-int ServerSockets::run(){
-
-	int sockfd, newsockfd, portno, pid;
-	socklen_t clilen;
-	struct sockaddr_in serv_addr, cli_addr;
-
-	sockfd = socket(AF_INET, SOCK_STREAM, 0);
-	if (sockfd < 0){
-		cout<<("ERROR opening socket");
+	struct sockaddr_in serv_addr;
+	socketServer = socket(AF_INET, SOCK_STREAM, 0);
+	if (socketServer < 0){
+		cout << "ERROR opening socket" << endl;
+		exit(-1);
 	}
-	bzero((char *) &serv_addr, sizeof(serv_addr));
-	portno = atoi("8080");
 	serv_addr.sin_family = AF_INET;
 	serv_addr.sin_addr.s_addr = INADDR_ANY;
-	serv_addr.sin_port = htons(portno);
+	serv_addr.sin_port = htons(PORT);
+	bzero(&(serv_addr.sin_zero), 8);
 
-	if (bind(sockfd, (struct sockaddr *)&serv_addr,
-		  sizeof(serv_addr)) < 0){
-		  cout<<("ERROR on binding") << endl;
-		  return -1;
+	if (bind(socketServer, (struct sockaddr *)&serv_addr,
+			  sizeof(struct sockaddr)) < 0){
+		cout<<("ERROR on binding") << endl;
+		exit(-1);
 	}
 
-	listen(sockfd, 5);
-	clilen = sizeof(cli_addr);
+	listen(socketServer, MAXCONNECTIONS);
+
 	struct ifreq ifr;
 	ifr.ifr_addr.sa_family = AF_INET;
 	/*
 	 * "wlp10s0" in GQosmio
-	 *
-	 * command ifconfig:
-	 *  -> eth0
-	 *  -> wlan0
-	 *  -> lo
+	 * command ifconfig
 	 *
 	 */
-	strncpy(ifr.ifr_name, "wlp3s0", IFNAMSIZ-1);
-	ioctl(sockfd, SIOCGIFADDR, &ifr);
+	strncpy(ifr.ifr_name, "wlp10s0", IFNAMSIZ-1);
+	ioctl(socketServer, SIOCGIFADDR, &ifr);
 	cout << "Server IP: " << (inet_ntoa(((struct sockaddr_in *)&ifr.ifr_addr)->sin_addr)) << endl;
-	cout << "Server Port: " << (portno) << endl;
+	cout << "Server Port: " << (PORT) << endl;
 
-	while (2) {
-	         newsockfd = accept(sockfd,(struct sockaddr *) &cli_addr, &clilen);
+	cliLen = sizeof(struct sockaddr);
 
-	         if (newsockfd < 0)
-	        	 cout <<("ERROR on accept");
-	         pid = fork();
-	         if (pid < 0)
-	             cout <<("ERROR on fork");
-	         if (pid == 0)  {
-	             //close(sockfd);
-	             dostuff(newsockfd);
-	             //exit(0);
-         }
-	         else close(newsockfd);
-	     } /* end of while */
-	     close(sockfd);
-	     return 0; /* we never get here */
+}
+
+ServerSockets::~ServerSockets() {
+
+}
+
+
+void ServerSockets::run(){
+	int p;
+	while(true){
+		int socketClient;
+		struct sockaddr_in cli_addr;
+		socketClient = accept(socketServer,(struct sockaddr *)&cli_addr, &cliLen);
+		if (socketClient < 0){
+			 cout << "ERROR on accept" << endl;
+			 break;
+		}
+
+//		p = fork();
+//		if(p < 0){
+//			exit(-1);
+//			break;
+//		}
+
+		int buffsize = (MAXDATA);
+		setsockopt(socketClient, SOL_SOCKET, SO_RCVBUF, &buffsize, sizeof(buffsize));
+		setsockopt(socketClient, SOL_SOCKET, SO_SNDBUF, &buffsize, sizeof(buffsize));
+
+		//anadir el cliente Node al vector
+		if (receiveMSG(socketClient) == "DiskNode"){
+			socketNode.push_back(socketClient);
+			sendMSG(socketClient, "agregado como nodo");
+			cout << "cantidad de clientes: " << ((int)socketNode.size()) << endl;
+		}
+		//verifica si el Node va ser borrado
+		//cierra la conexion y lo borra del vector
+		for(int i = 0; i < (int)socketNode.size(); i++){
+			if (receiveMSG(socketNode.operator [](i)) == "BorrarNode"){
+				close(socketNode.operator [](i));
+				socketNode.erase(socketNode.begin() + i);
+			}
+		}
+
+		if(receiveMSG(socketClient) == "UploadVideo"){
+			sendMSG(socketClient, "Solicitud Procesada");
+
+			sleep(5);
+
+			string binaryVideo = receiveMSG(socketClient);
+			cout << binaryVideo << endl;
+			int lengCut = (binaryVideo.length()) / 6;
+			while(binaryVideo != ""){
+				string cut = binaryVideo.substr(0, lengCut);
+				dataVideo.push_back(cut);
+				binaryVideo = binaryVideo.substr(lengCut, binaryVideo.length() -1);
+			}
+//			//enviar cada parte a cada nodo
+//			int nodo = 0;
+//			for(int i = 0; i < (int)dataVideo.size(); i++){
+//				if (nodo > (int)socketNode.size()){
+//					nodo = 0;
+//				}
+//				sendMSG(socketNode.operator [](nodo), dataVideo.operator [](i));
+//			}
+
+		}
+
+		if(receiveMSG(socketClient) == "E"){
+
+			sendMSG(socketNode.operator [](1), "prueba enviar dato al node 2");
+		}
+
+		if(receiveMSG(socketClient) == "Streaming"){
+			cout << "el mae quiere hacer streaming\n";
+		}
+		if(receiveMSG(socketClient) == "SetMetaData"){
+			cout << "el mae quiere cambiar la metada" << endl;
+			//mostrar metada del video que quiere con
+			sendMSG(socketClient, "esta es la metada");
+		}
+
+	}
+}
+
+
+void ServerSockets::sendMSG(int socketClient, string message){
+	int lengthMSG = message.length();
+	const char *buffer = new char[lengthMSG];
+	buffer = message.c_str();
+
+	int s = send(socketClient, buffer, lengthMSG+1, MSG_OOB|MSG_PEEK);
+	if (s < 0){
+		cout << "ERROR on send message to client" << endl;
+		exit(-1);
+	}
+
+	//cout << "bytes send: " << s-1 << endl;
+}
+
+
+string ServerSockets::receiveMSG(int socketClient){
+	char *buffer = new char[MAXDATA];
+	int r = recv(socketClient, buffer, MAXDATA, MSG_PEEK);
+	if (r < 0){
+		cout << "ERROR on receive message from client" << endl;
+		exit(-1);
+	}
+
+	string message;
+	message = buffer;
+	return message;
+
+	//cout << "bytes received: " << r << endl;
+
 }

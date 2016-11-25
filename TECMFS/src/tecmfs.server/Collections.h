@@ -8,7 +8,6 @@
 #ifndef TECMFS_SERVER_COLLECTIONS_H_
 #define TECMFS_SERVER_COLLECTIONS_H_
 
-#include "DocumentSingleList.h"
 #include "Document.h"
 
 #include <iostream>
@@ -20,6 +19,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <vector>
 
 using namespace std;
 
@@ -32,7 +32,7 @@ class Collections {
 
 private:
 	/*Attributes*/
-	DocumentSingleList  documentList; /*Single List for managing all the Documents.*/
+	vector <Document> documentVector; /*Vector that manage all the the Documents.*/
 	string name = "Collection."; /*Set the name of the Collection.*/
 
 public:
@@ -42,6 +42,7 @@ public:
 
 	/*Getters*/
 	string getName();
+	vector <Document> getDocumentVector();
 
 	/*Setters*/
 	void setName(string name);

@@ -24,6 +24,11 @@
 #include <string>
 #include <cstdlib>
 #include <stdio.h>
+#include <vector>
+
+#define MAXDATA 64000000
+#define MAXCONNECTIONS 5
+#define PORT 8080
 
 
 using namespace std;
@@ -35,14 +40,23 @@ using namespace std;
 class ServerSockets {
 
 
-public:
-	/*Methods*/
-	ServerSockets(); /*Constructor.*/
-	virtual ~ServerSockets(); /*Destructor.*/
 
-	void error(const char *msg); /*Control Errors.*/
-	void dostuff (int sock); /*Controls the socket..*/
-	int run(); /*Makes the connection.*/
+public:
+	/*Methods.*/
+	ServerSockets();/*Constructor.*/
+	virtual ~ServerSockets(); /*Destructor.*/
+	void run();/*Makes the connection.*/
+
+
+private:
+	/*Attributes.*/
+	int socketServer; /*Socket integer manager.*/
+	socklen_t cliLen; /*Socket client.*/
+
+	/*.*/
+	void sendMSG(int client, string msg); /*Send messages to the client.*/
+	string receiveMSG(int client); /*Receive messages from the client.*/
+
 };
 
 #endif /* TECMFS_SERVER_SERVERSOCKETS_H_ */
