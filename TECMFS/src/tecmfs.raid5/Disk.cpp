@@ -148,29 +148,66 @@ Block Disk::getBlockP(){
 }
 
 
-
+/**
+ *
+ */
 void Disk::readXMLConfig(){
 
 }
 
 /**
+ * Receive data (string) and a number (int) of the block
+ * to save the data.
  *
+ * @param data string, i int
  */
 void Disk::saveDataBlock(string data, int i){
 	vectorBlocks.at(i).saveData(data);
 }
 
-
+/**
+ * Receive the calculated parity (string) and saved
+ * on the specific Block of the Disk to the parity.
+ *
+ * @param parity data
+ */
 void Disk::saveParity(string parity){
-	vectorBlocks.at(4).saveData(parity);
+	vectorBlocks.at(3).saveData(parity);
 
 }
 
-void Disk::sendData(Block block){
-	string data = block.getData();
-	cout << data;
+/**
+ *Takes from the Disk's Blocks all information
+ *and keep the Blocks empty.
+ */
+string Disk::sendDataDisk(){
+	string allData, dataA, dataB, dataC;
+	dataA = vectorBlocks.at(0).getData();
+	dataB = vectorBlocks.at(1).getData();
+	dataC = vectorBlocks.at(2).getData();
+	allData = dataA + dataB + dataC;
+	this->cleanDisk();
+	return allData;
 }
 
+
+
+/**
+ * Empty of the files that makes up the Disk.
+ */
+void Disk::cleanDisk(){
+	vectorBlocks.at(0).cleanBlock();
+	vectorBlocks.at(1).cleanBlock();
+	vectorBlocks.at(2).cleanBlock();
+	vectorBlocks.at(3).cleanBlock();
+}
+
+/**
+ * Check the size of the Disk, if it is possible
+ * to save data.
+ *
+ * @return answer bool
+ */
 bool Disk::checkSize(){
 	bool answer = false;
 	if (this->getSizeDisk() < 40000000)
@@ -179,6 +216,12 @@ bool Disk::checkSize(){
 }
 
 
+/**
+ *Get the size of the Disk by adding the
+ *individual sizes of all the Blocks.
+ *
+ *@return totalSize int
+ */
 int Disk::getSizeDisk(){
 	int totalSize;
 	for(int i = 0; i<4;i++){
@@ -187,24 +230,14 @@ int Disk::getSizeDisk(){
 	return totalSize;
 }
 
-void Disk::deleteBlock(Block block){
-
-	block.deleteFile();
-	block.~Block();
-//	string blockID = block.getID();
-//	for(int i = 0; i<4;i++){
-//		string vectorBlockID = this->getVectorBlocks().at(i).getID();
-//		if(vectorBlockID == blockID){
-//			this->getVectorBlocks().erase(this->getVectorBlocks().begin()+i);
-//			block.deleteFile();
-//			block.~Block();
-//		}
-//	}
+/**
+ * Delete an espific Block from the Disk.
+ */
+void Disk::deleteBlock(int i){
+	vectorBlocks.at(i).deleteFile();
+	vectorBlocks.at(i).~Block();
 }
 
-void Disk::deleteDisc(){
-	this->~Disk();
-}
 
 
 

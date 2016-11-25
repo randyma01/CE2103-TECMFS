@@ -70,7 +70,7 @@ string ControllerNode::superXOR(string a,string b){
 	string resp="";
 	for(int i=a.length()-1; i>=0; i--){
 		resp= XOR(a[i], b[i]) += resp;
-		cout<<i<<endl;
+		//cout<<i<<endl;
 
 	}
 	return resp;
@@ -87,7 +87,7 @@ string ControllerNode::superXOR(string a,string b){
 string ControllerNode::parityMgmt(string a, string b, string c){
 	string d;
 	d=superXOR(a,b);
-	d=superXOR(a,d);
+	d=superXOR(c,d);
 	return d;
 
 }

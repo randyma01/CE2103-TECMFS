@@ -59,14 +59,14 @@ public:
 	void setName(char name);
 
 	/*Functions of the disk.*/
-	string cutData(string data); /*.*/
 	void readXMLConfig(); /*Reads the XML for the IP and the path for the Disk.*/
 	void saveDataBlock(string data, int i); /*Save the data into the block.*/
 	void saveParity(string parity); /*Sava the parity.*/
-	void sendData(Block block); /*Send the data that has in the file.*/
+	string sendDataDisk(); /*Send the data that has in the file.*/
+	void cleanDisk(); /*Erase all data from blocks.*/
 	bool checkSize(); /*Check if there is free space in the disk. (Checks all blocks)*/
 	int getSizeDisk(); /*Returns the actual size of the disk by adding the data from all the blocks.*/
-	void deleteBlock(Block block); /*Delete the desire block with all information related to it.*/
+	void deleteBlock(int i); /*Delete the desire block with all information related to it.*/
 	void deleteDisc(); /*Delete this disk with all information related to it.*/
 
 };

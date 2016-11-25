@@ -21,6 +21,7 @@
 #include "tecmfs.server/Document.h"
 #include "tecmfs.server/Collections.h"
 #include "tecmfs.server/ServerSockets.h"
+#include "tecmfs.server/ControllerNode.h"
 
 
 
@@ -29,56 +30,22 @@ using namespace std;
 int main() {
 	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
 
-	string gold;
+	ControllerNode bana;
 
-	for (int i = 0; i<250; i++){
-		gold += "C";
-	}
+	string A = "110101";
+	string B = "111111";
+	string C = "010101";
+	string paridadTemporal = bana.superXOR(A,B);
+	string paridadFinal = bana.superXOR(paridadTemporal,C);
 
-	cout << gold.length() << endl;
+	//quiro recuperar C, por medio de los restantes A, B paridadFinal
 
-	gold += "·";
-
-
-
-
-//	const char * path = "/home/randy/git/TECMFS/TECMFS/DiskT/BlockA.txt";
-//
-//
-//	int fileSize;
-//	streampos begin,end;
-//	ifstream myfile(path);
-//	begin = myfile.tellg();
-//	myfile.seekg (0, ios::end);
-//	end = myfile.tellg();
-//	myfile.close();
-//	fileSize = (end-begin);
-//	cout << fileSize;
+	string newC = bana.parityMgmt(C, B, paridadFinal);
+	cout << newC << endl;
 
 
-	//string line;
-//	string info;
-//
-//	const char * path = "/home/randy/git/TECMFS/TECMFS/InformationNode.xml";
-//
-//	ifstream myfile(path);
-//
-//	char c;
 
-//	if (myfile.is_open()){
-//		while ( getline (myfile,line)){
-//			 //cout << line << '\n';
-//			 if (line == "<IP>"){
-//				 myfile.get(c);
-//				 if (c == '1' or c =='2' or c =='3' or c =='4' or c =='5' or c =='6' or c =='7'orc =='8'or =='9' or c =='0'){
-//					 info +=c;
-//				 }
-//				cout << c << endl;
-//			 }
-//		}
-//		myfile.close();
-//	}
-//	else cout << "Unable to open file";
+
 
 	return 0;
 }
