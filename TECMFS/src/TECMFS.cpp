@@ -38,10 +38,18 @@ int main() {
 	string paridadTemporal = bana.superXOR(A,B);
 	string paridadFinal = bana.superXOR(paridadTemporal,C);
 
-	//quiro recuperar C, por medio de los restantes A, B paridadFinal
+	Disk disco = Disk('G');
 
-	string newC = bana.parityMgmt(C, B, paridadFinal);
-	cout << newC << endl;
+	disco.saveDataBlock(A, 0);
+	disco.saveDataBlock(B, 1);
+	disco.saveDataBlock(C, 2);
+	disco.saveDataBlock(paridadTemporal, 3);
+
+
+//
+//	//quiro recuperar C, por medio de los restantes A, B paridadFinal
+//	string newC = bana.parityMgmt(C, B, paridadFinal);
+//	cout << newC << endl;
 
 
 

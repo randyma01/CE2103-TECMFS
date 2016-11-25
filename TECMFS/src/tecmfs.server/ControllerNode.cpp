@@ -86,8 +86,8 @@ string ControllerNode::superXOR(string a,string b){
  */
 string ControllerNode::parityMgmt(string a, string b, string c){
 	string d;
-	d=superXOR(a,b);
-	d=superXOR(c,d);
+	d = superXOR(a,b);
+	d = superXOR(c,d);
 	return d;
 
 }

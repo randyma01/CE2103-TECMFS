@@ -10,6 +10,9 @@
 vector<int> socketNode;
 vector<string> dataVideo;
 
+/**
+ * Constructor. Set up the connection for the Server.
+ */
 ServerSockets::ServerSockets() {
 	struct sockaddr_in serv_addr;
 	socketServer = socket(AF_INET, SOCK_STREAM, 0);
@@ -37,7 +40,7 @@ ServerSockets::ServerSockets() {
 	 * command ifconfig
 	 *
 	 */
-	strncpy(ifr.ifr_name, "wlp10s0", IFNAMSIZ-1);
+	strncpy(ifr.ifr_name, "wlp3s0", IFNAMSIZ-1);
 	ioctl(socketServer, SIOCGIFADDR, &ifr);
 	cout << "Server IP: " << (inet_ntoa(((struct sockaddr_in *)&ifr.ifr_addr)->sin_addr)) << endl;
 	cout << "Server Port: " << (PORT) << endl;
@@ -46,11 +49,16 @@ ServerSockets::ServerSockets() {
 
 }
 
+/**
+ * Destoyer.
+ */
 ServerSockets::~ServerSockets() {
-
 }
 
 
+/**
+ * Starts the connection with the Client.
+ */
 void ServerSockets::run(){
 	int p;
 	while(true){
@@ -128,7 +136,11 @@ void ServerSockets::run(){
 	}
 }
 
-
+/**
+ * Send messages to the client.
+ *
+ * @param socketClient, message string
+ */
 void ServerSockets::sendMSG(int socketClient, string message){
 	int lengthMSG = message.length();
 	const char *buffer = new char[lengthMSG];
@@ -143,7 +155,10 @@ void ServerSockets::sendMSG(int socketClient, string message){
 	//cout << "bytes send: " << s-1 << endl;
 }
 
-
+/**
+ * Receives messages from the Client.
+ * @param socketClient int
+ */
 string ServerSockets::receiveMSG(int socketClient){
 	char *buffer = new char[MAXDATA];
 	int r = recv(socketClient, buffer, MAXDATA, MSG_PEEK);
