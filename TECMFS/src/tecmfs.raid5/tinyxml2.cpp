@@ -4,6 +4,7 @@ Original code by Lee Thomason (www.grinninglizard.com)
 This software is provided 'as-is', without any express or implied
 warranty. In no event will the authors be held liable for any
 damages arising from the use of this software.
+
 Permission is granted to anyone to use this software for any
 purpose, including commercial applications, and to alter it and
 redistribute it freely, subject to the following restrictions:
@@ -740,7 +741,7 @@ XMLNode::~XMLNode()
     }
 }
 
-const char* XMLNode::Value() const
+const char* XMLNode::Value() const 
 {
     // Edge case: XMLDocuments don't have a Value. Return null.
     if ( this->ToDocument() )
@@ -1259,12 +1260,12 @@ bool XMLUnknown::Accept( XMLVisitor* visitor ) const
 
 // --------- XMLAttribute ---------- //
 
-const char* XMLAttribute::Name() const
+const char* XMLAttribute::Name() const 
 {
     return _name.GetStr();
 }
 
-const char* XMLAttribute::Value() const
+const char* XMLAttribute::Value() const 
 {
     return _value.GetStr();
 }
@@ -1472,7 +1473,7 @@ void	XMLElement::SetText( const char* inText )
 }
 
 
-void XMLElement::SetText( int v )
+void XMLElement::SetText( int v ) 
 {
     char buf[BUF_SIZE];
     XMLUtil::ToStr( v, buf, BUF_SIZE );
@@ -1480,7 +1481,7 @@ void XMLElement::SetText( int v )
 }
 
 
-void XMLElement::SetText( unsigned v )
+void XMLElement::SetText( unsigned v ) 
 {
     char buf[BUF_SIZE];
     XMLUtil::ToStr( v, buf, BUF_SIZE );
@@ -1504,7 +1505,7 @@ void XMLElement::SetText( bool v )
 }
 
 
-void XMLElement::SetText( float v )
+void XMLElement::SetText( float v ) 
 {
     char buf[BUF_SIZE];
     XMLUtil::ToStr( v, buf, BUF_SIZE );
@@ -1512,7 +1513,7 @@ void XMLElement::SetText( float v )
 }
 
 
-void XMLElement::SetText( double v )
+void XMLElement::SetText( double v ) 
 {
     char buf[BUF_SIZE];
     XMLUtil::ToStr( v, buf, BUF_SIZE );
@@ -1865,7 +1866,7 @@ void XMLDocument::Clear()
     _commentPool.Trace( "comment" );
     _attributePool.Trace( "attribute" );
 #endif
-
+    
 #ifdef DEBUG
     if ( !hadError ) {
         TIXMLASSERT( _elementPool.CurrentAllocs()   == _elementPool.Untracked() );
@@ -1941,7 +1942,7 @@ static FILE* callfopen( const char* filepath, const char* mode )
 #endif
     return fp;
 }
-
+    
 void XMLDocument::DeleteNode( XMLNode* node )	{
     TIXMLASSERT( node );
     TIXMLASSERT(node->_document == this );
@@ -2113,7 +2114,7 @@ void XMLDocument::SetError( XMLError error, const char* str1, const char* str2 )
 {
     TIXMLASSERT( error >= 0 && error < XML_ERROR_COUNT );
     _errorID = error;
-
+	
 	_errorStr1.Reset();
 	_errorStr2.Reset();
 
@@ -2544,3 +2545,4 @@ bool XMLPrinter::Visit( const XMLUnknown& unknown )
 }
 
 }   // namespace tinyxml2
+

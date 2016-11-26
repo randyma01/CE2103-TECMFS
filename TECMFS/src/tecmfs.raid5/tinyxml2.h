@@ -4,6 +4,7 @@ Original code by Lee Thomason (www.grinninglizard.com)
 This software is provided 'as-is', without any express or implied
 warranty. In no event will the authors be held liable for any
 damages arising from the use of this software.
+
 Permission is granted to anyone to use this software for any
 purpose, including commercial applications, and to alter it and
 redistribute it freely, subject to the following restrictions:
@@ -47,6 +48,7 @@ distribution.
 /*
 	gcc:
         g++ -Wall -DDEBUG tinyxml2.cpp xmltest.cpp -o gccxmltest.exe
+
     Formatting, Artistic Style:
         AStyle.exe --style=1tbs --indent-switches --break-closing-brackets --indent-preprocessor tinyxml2.cpp tinyxml2.h
 */
@@ -327,7 +329,7 @@ public:
     ~MemPoolT() {
         Clear();
     }
-
+    
     void Clear() {
         // Delete the blocks.
         while( !_blockPtrs.Empty()) {
@@ -373,7 +375,7 @@ public:
         ++_nUntracked;
         return result;
     }
-
+    
     virtual void Free( void* mem ) {
         if ( !mem ) {
             return;
@@ -441,12 +443,17 @@ private:
 	class to handle callbacks. For nodes that contain other nodes (Document, Element)
 	you will get called with a VisitEnter/VisitExit pair. Nodes that are always leafs
 	are simply called with Visit().
+
 	If you return 'true' from a Visit method, recursive parsing will continue. If you return
 	false, <b>no children of this node or its siblings</b> will be visited.
+
 	All flavors of Visit methods have a default implementation that returns 'true' (continue
 	visiting). You need to only override methods that are interesting to you.
+
 	Generally Accept() is called on the XMLDocument, although all nodes support visiting.
+
 	You should never change the document from a callback.
+
 	@sa XMLNode::Accept()
 */
 class TINYXML2_LIB XMLVisitor
@@ -540,7 +547,7 @@ public:
     static bool IsWhiteSpace( char p )					{
         return !IsUTF8Continuation(p) && isspace( static_cast<unsigned char>(p) );
     }
-
+    
     inline static bool IsNameStartChar( unsigned char ch ) {
         if ( ch >= 128 ) {
             // This is a heuristic guess in attempt to not implement Unicode-aware isalpha()
@@ -551,7 +558,7 @@ public:
         }
         return ch == ':' || ch == '_';
     }
-
+    
     inline static bool IsNameChar( unsigned char ch ) {
         return IsNameStartChar( ch )
                || isdigit( ch )
@@ -565,7 +572,7 @@ public:
         }
         return strncmp( p, q, nChar ) == 0;
     }
-
+    
     inline static bool IsUTF8Continuation( char p ) {
         return ( p & 0x80 ) != 0;
     }
@@ -600,19 +607,23 @@ public:
 	be navigated. A node is always in a XMLDocument.
 	The type of a XMLNode can be queried, and it can
 	be cast to its more defined type.
+
 	A XMLDocument allocates memory for all its Nodes.
 	When the XMLDocument gets deleted, all its Nodes
 	will also be deleted.
+
 	@verbatim
 	A Document can contain:	Element	(container or leaf)
 							Comment (leaf)
 							Unknown (leaf)
 							Declaration( leaf )
+
 	An Element can contain:	Element (container or leaf)
 							Text	(leaf)
 							Attributes (not on tree)
 							Comment (leaf)
 							Unknown (leaf)
+
 	@endverbatim
 */
 class TINYXML2_LIB XMLNode
@@ -820,6 +831,7 @@ public:
     	the owner of the new Node. If the 'document' is
     	null, then the node returned will be allocated
     	from the current Document. (this->GetDocument())
+
     	Note: if called on a XMLDocument, this will return null.
     */
     virtual XMLNode* ShallowClone( XMLDocument* document ) const = 0;
@@ -827,6 +839,7 @@ public:
     /**
     	Test if 2 nodes are the same, but don't test children.
     	The 2 nodes do not need to be in the same Document.
+
     	Note: if called on a XMLDocument, this will return false.
     */
     virtual bool ShallowEqual( const XMLNode* compare ) const = 0;
@@ -834,13 +847,18 @@ public:
     /** Accept a hierarchical visit of the nodes in the TinyXML-2 DOM. Every node in the
     	XML tree will be conditionally visited and the host will be called back
     	via the XMLVisitor interface.
+
     	This is essentially a SAX interface for TinyXML-2. (Note however it doesn't re-parse
     	the XML for the callbacks, so the performance of TinyXML-2 is unchanged by using this
     	interface versus any other.)
+
     	The interface has been based on ideas from:
+
     	- http://www.saxproject.org/
     	- http://c2.com/cgi/wiki?HierarchicalVisitorPattern
+
     	Which are both good references for "visiting".
+
     	An example of using Accept():
     	@verbatim
     	XMLPrinter printer;
@@ -850,8 +868,8 @@ public:
     */
     virtual bool Accept( XMLVisitor* visitor ) const = 0;
 
-	/**
-		Set user data into the XMLNode. TinyXML-2 in
+	/** 
+		Set user data into the XMLNode. TinyXML-2 in 
 		no way processes or interprets user data.
 		It is initially 0.
 	*/
@@ -894,10 +912,12 @@ private:
 
 
 /** XML text.
+
 	Note that a text node can have child element nodes, for example:
 	@verbatim
 	<root>This is <b>bold</b></root>
 	@endverbatim
+
 	A text node can have 2 ways to output the next. "normal" output
 	and CDATA. It will default to the mode it was parsed from the XML file and
 	you generally want to leave it alone, but you can change the output mode with
@@ -975,8 +995,10 @@ private:
 	@verbatim
 		<?xml version="1.0" standalone="yes"?>
 	@endverbatim
+
 	TinyXML-2 will happily read or write files without a declaration,
 	however.
+
 	The text of the declaration isn't interpreted. It is parsed
 	and written as a string.
 */
@@ -1012,6 +1034,7 @@ private:
 	unknown. It is a tag of text, but should not be modified.
 	It will be written back to the XML, unchanged, when the file
 	is saved.
+
 	DTD tags get thrown into XMLUnknowns.
 */
 class TINYXML2_LIB XMLUnknown : public XMLNode
@@ -1045,6 +1068,7 @@ private:
 
 /** An attribute is a name-value pair. Elements have an arbitrary
 	number of attributes, each with a unique name.
+
 	@note The attributes are not XMLNodes. You may only query the
 	Next() attribute in a list.
 */
@@ -1182,15 +1206,19 @@ public:
     /** Given an attribute name, Attribute() returns the value
     	for the attribute of that name, or null if none
     	exists. For example:
+
     	@verbatim
     	const char* value = ele->Attribute( "foo" );
     	@endverbatim
+
     	The 'value' parameter is normally null. However, if specified,
     	the attribute will only be returned if the 'name' and 'value'
     	match. This allow you to write code:
+
     	@verbatim
     	if ( ele->Attribute( "foo", "bar" ) ) callFooIsBar();
     	@endverbatim
+
     	rather than:
     	@verbatim
     	if ( ele->Attribute( "foo" ) ) {
@@ -1251,6 +1279,7 @@ public:
     	will be written to 'value'. If not successful, nothing will
     	be written to 'value'. This allows you to provide default
     	value:
+
     	@verbatim
     	int value = 10;
     	QueryIntAttribute( "foo", &value );		// if "foo" isn't found, value will still be 10
@@ -1307,18 +1336,19 @@ public:
         return a->QueryFloatValue( value );
     }
 
-
+	
     /** Given an attribute name, QueryAttribute() returns
     	XML_SUCCESS, XML_WRONG_ATTRIBUTE_TYPE if the conversion
     	can't be performed, or XML_NO_ATTRIBUTE if the attribute
     	doesn't exist. It is overloaded for the primitive types,
 		and is a generally more convenient replacement of
 		QueryIntAttribute() and related functions.
-
+		
 		If successful, the result of the conversion
     	will be written to 'value'. If not successful, nothing will
     	be written to 'value'. This allows you to provide default
     	value:
+
     	@verbatim
     	int value = 10;
     	QueryAttribute( "foo", &value );		// if "foo" isn't found, value will still be 10
@@ -1401,19 +1431,24 @@ public:
     /** Convenience function for easy access to the text inside an element. Although easy
     	and concise, GetText() is limited compared to getting the XMLText child
     	and accessing it directly.
+
     	If the first child of 'this' is a XMLText, the GetText()
     	returns the character string of the Text node, else null is returned.
+
     	This is a convenient method for getting the text of simple contained text:
     	@verbatim
     	<foo>This is text</foo>
     		const char* str = fooElement->GetText();
     	@endverbatim
+
     	'str' will be a pointer to "This is text".
+
     	Note that this function can be misleading. If the element foo was created from
     	this XML:
     	@verbatim
     		<foo><b>This is text</b></foo>
     	@endverbatim
+
     	then the value of str would be null. The first child node isn't a text node, it is
     	another element. From this XML:
     	@verbatim
@@ -1426,24 +1461,28 @@ public:
     /** Convenience function for easy access to the text inside an element. Although easy
     	and concise, SetText() is limited compared to creating an XMLText child
     	and mutating it directly.
+
     	If the first child of 'this' is a XMLText, SetText() sets its value to
 		the given string, otherwise it will create a first child that is an XMLText.
+
     	This is a convenient method for setting the text of simple contained text:
     	@verbatim
     	<foo>This is text</foo>
     		fooElement->SetText( "Hullaballoo!" );
      	<foo>Hullaballoo!</foo>
 		@endverbatim
+
     	Note that this function can be misleading. If the element foo was created from
     	this XML:
     	@verbatim
     		<foo><b>This is text</b></foo>
     	@endverbatim
+
     	then it will not change "This is text", but rather prefix it with a text element:
     	@verbatim
     		<foo>Hullaballoo!<b>This is text</b></foo>
     	@endverbatim
-
+		
 		For this XML:
     	@verbatim
     		<foo />
@@ -1457,15 +1496,15 @@ public:
     /// Convenience method for setting text inside an element. See SetText() for important limitations.
     void SetText( int value );
     /// Convenience method for setting text inside an element. See SetText() for important limitations.
-    void SetText( unsigned value );
+    void SetText( unsigned value );  
 	/// Convenience method for setting text inside an element. See SetText() for important limitations.
 	void SetText(int64_t value);
 	/// Convenience method for setting text inside an element. See SetText() for important limitations.
-    void SetText( bool value );
+    void SetText( bool value );  
     /// Convenience method for setting text inside an element. See SetText() for important limitations.
-    void SetText( double value );
+    void SetText( double value );  
     /// Convenience method for setting text inside an element. See SetText() for important limitations.
-    void SetText( float value );
+    void SetText( float value );  
 
     /**
     	Convenience method to query the value of a child text node. This is probably best
@@ -1476,8 +1515,10 @@ public:
     			<y>1.4</y>
     		</point>
     	@endverbatim
+
     	The QueryIntText() and similar functions provide a safe and easier way to get to the
     	"value" of x and y.
+
     	@verbatim
     		int x = 0;
     		float y = 0;	// types of x and y are contrived for example
@@ -1486,8 +1527,10 @@ public:
     		xElement->QueryIntText( &x );
     		yElement->QueryFloatText( &y );
     	@endverbatim
+
     	@returns XML_SUCCESS (0) on success, XML_CAN_NOT_CONVERT_TEXT if the text cannot be converted
     			 to the requested type, and XML_NO_TEXT_NODE if there is no child text to query.
+
     */
     XMLError QueryIntText( int* ival ) const;
     /// See QueryIntText()
@@ -1571,6 +1614,7 @@ public:
     	Parse an XML file from a character string.
     	Returns XML_SUCCESS (0) on success, or
     	an errorID.
+
     	You may optionally pass in the 'nBytes', which is
     	the number of bytes which will be parsed. If not
     	specified, TinyXML-2 will assume 'xml' points to a
@@ -1587,11 +1631,12 @@ public:
 
     /**
     	Load an XML file from disk. You are responsible
-    	for providing and closing the FILE*.
-
+    	for providing and closing the FILE*. 
+     
         NOTE: The file should be opened as binary ("rb")
         not text in order for TinyXML-2 to correctly
         do newline normalization.
+
     	Returns XML_SUCCESS (0) on success, or
     	an errorID.
     */
@@ -1607,6 +1652,7 @@ public:
     /**
     	Save the XML file to disk. You are responsible
     	for providing and closing the FILE*.
+
     	Returns XML_SUCCESS (0) on success, or
     	an errorID.
     */
@@ -1647,6 +1693,7 @@ public:
     	XMLPrinter printer( fp );
     	doc.Print( &printer );
     	@endverbatim
+
     	Or you can use a printer to print to memory:
     	@verbatim
     	XMLPrinter printer;
@@ -1679,6 +1726,7 @@ public:
     	Create a new Declaration associated with
     	this Document. The memory for the object
     	is managed by the Document.
+
     	If the 'text' param is null, the standard
     	declaration is used.:
     	@verbatim
@@ -1721,7 +1769,7 @@ public:
     }
     /// If there is an error, print it to stdout.
     void PrintError() const;
-
+    
     /// Clear the document, resetting it to the initial state.
     void Clear();
 
@@ -1762,6 +1810,7 @@ private:
 	A XMLHandle is a class that wraps a node pointer with null checks; this is
 	an incredibly useful thing. Note that XMLHandle is not part of the TinyXML-2
 	DOM structure. It is a separate utility class.
+
 	Take an example:
 	@verbatim
 	<Document>
@@ -1771,8 +1820,10 @@ private:
 		</Element>
 	</Document>
 	@endverbatim
+
 	Assuming you want the value of "attributeB" in the 2nd "Child" element, it's very
 	easy to write a *lot* of code that looks like:
+
 	@verbatim
 	XMLElement* root = document.FirstChildElement( "Document" );
 	if ( root )
@@ -1788,9 +1839,11 @@ private:
 				{
 					// Finally do something useful.
 	@endverbatim
+
 	And that doesn't even cover "else" cases. XMLHandle addresses the verbosity
 	of such code. A XMLHandle checks for null pointers so it is perfectly safe
 	and correct to use:
+
 	@verbatim
 	XMLHandle docHandle( &document );
 	XMLElement* child2 = docHandle.FirstChildElement( "Document" ).FirstChildElement( "Element" ).FirstChildElement().NextSiblingElement();
@@ -1798,11 +1851,14 @@ private:
 	{
 		// do something useful
 	@endverbatim
+
 	Which is MUCH more concise and useful.
+
 	It is also safe to copy handles - internally they are nothing more than node pointers.
 	@verbatim
 	XMLHandle handleCopy = handle;
 	@endverbatim
+
 	See also XMLConstHandle, which is the same as XMLHandle, but operates on const objects.
 */
 class TINYXML2_LIB XMLHandle
@@ -1957,29 +2013,38 @@ private:
 /**
 	Printing functionality. The XMLPrinter gives you more
 	options than the XMLDocument::Print() method.
+
 	It can:
 	-# Print to memory.
 	-# Print to a file you provide.
 	-# Print XML without a XMLDocument.
+
 	Print to Memory
+
 	@verbatim
 	XMLPrinter printer;
 	doc.Print( &printer );
 	SomeFunction( printer.CStr() );
 	@endverbatim
+
 	Print to a File
+
 	You provide the file pointer.
 	@verbatim
 	XMLPrinter printer( fp );
 	doc.Print( &printer );
 	@endverbatim
+
 	Print without a XMLDocument
+
 	When loading, an XML parser is very useful. However, sometimes
 	when saving, it just gets in the way. The code is often set up
 	for streaming, and constructing the DOM is just overhead.
+
 	The Printer supports the streaming case. The following code
 	prints out a trivially simple XML file without ever creating
 	an XML document.
+
 	@verbatim
 	XMLPrinter printer( fp );
 	printer.OpenElement( "foo" );

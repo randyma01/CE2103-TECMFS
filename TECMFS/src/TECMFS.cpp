@@ -33,6 +33,7 @@
 #endif
 
 using namespace std;
+using namespace tinyxml2;
 
 int main() {
 	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
