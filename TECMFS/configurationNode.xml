@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<diskNode>
+<config>	
+	<ip>
+	"10.10.10.71"
+	</ip>
+	<port>
+	8080
+	</port>
+	<path>
+	"/home/randy/git/TECMFS/TECMFS"
+	</path>
+</config>
+</diskNode>
