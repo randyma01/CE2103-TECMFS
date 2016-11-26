@@ -36,47 +36,50 @@ using namespace std;
 using namespace tinyxml2;
 
 int main() {
-	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
+	cout << "!!!Hello TECMFS!!!" << endl; // prints !!!Hello World!!!
 
-
-
-	XMLDocument doc;
-	doc.LoadFile(".xml");
-
-	const char* ip = doc.FirstChildElement( "diskNode" )->FirstChildElement("config")->FirstChildElement("ip")->GetText();
-	const char* port = doc.FirstChildElement( "diskNode" )->FirstChildElement("config")->FirstChildElement("port")->GetText();
-	const char* path = doc.FirstChildElement( "diskNode" )->FirstChildElement("config")->FirstChildElement("path")->GetText();
-
-	cout<<ip<<endl;
-	cout<<port<<endl;
-	cout<<path<<endl;
-
+//	const char* a = "r";
+//	const char *y = "/home/randy/git/TECMFS/TECMFS/DiskT/BlockA" + *a;
+//
+//	cout << y;
+//	XMLDocument doc;
+//	doc.LoadFile("configurationNode.xml");
+//
+//	const char* ip = doc.FirstChildElement( "diskNode" )->FirstChildElement("config")->FirstChildElement("ip")->GetText();
+//	const char* port = doc.FirstChildElement( "diskNode" )->FirstChildElement("config")->FirstChildElement("port")->GetText();
+//	const char* path = doc.FirstChildElement( "diskNode" )->FirstChildElement("config")->FirstChildElement("path")->GetText();
+//
+//	cout<<ip<<endl;
+//	cout<<port<<endl;
+//	cout<<path<<endl;
+//
+//	int port2 = *port;
+//
+//	cout << port2 << endl;
 
 //	ServerSockets controllerS;
 //	controllerS.run();
+//
+	ControllerNode bana;
 
-//	ControllerNode bana;
-//
-//	string A = "110101";
-//	string B = "111111";
-//	string C = "010101";
-//	string paridadTemporal = bana.superXOR(A,B);
-//	string paridadFinal = bana.superXOR(paridadTemporal,C);
-//
-//	Disk disco = Disk('G');
-//
-//	disco.saveDataBlock(A, 0);
-//	disco.saveDataBlock(B, 1);
-//	disco.saveDataBlock(C, 2);
-//	disco.saveDataBlock(paridadTemporal, 3);
+	string A = "110101";
+	string B = "111111";
+	string C = "010101";
+	string paridadTemporal = bana.superXOR(A,B);
+	string paridadFinal = bana.superXOR(paridadTemporal,C);
+
+    Disk disco = Disk("H");
+
+	disco.saveDataBlock(A, 0);
+	disco.saveDataBlock(B, 1);
+	disco.saveDataBlock(C, 2);
+	disco.saveDataBlock(paridadTemporal, 3);
 
 
 //
 //	//quiro recuperar C, por medio de los restantes A, B paridadFinal
 //	string newC = bana.parityMgmt(C, B, paridadFinal);
 //	cout << newC << endl;
-
-
 
 
 

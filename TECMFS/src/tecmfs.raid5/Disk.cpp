@@ -30,11 +30,23 @@ Disk::Disk() {
 /**
  *Constructor.
  */
- Disk::Disk(char name){
-	 //this->readXMLConfig(); /*Sets the port and IP.*/
+ Disk::Disk(string name){
+	 XMLDocument doc;
+	 doc.LoadFile("configurationNode.xml");
+	 const char* ip = doc.FirstChildElement( "diskNode" )->FirstChildElement("config")->FirstChildElement("ip")->GetText();
+	 const char* port = doc.FirstChildElement( "diskNode" )->FirstChildElement("config")->FirstChildElement("port")->GetText();
+	 const char* path = doc.FirstChildElement( "diskNode" )->FirstChildElement("config")->FirstChildElement("path")->GetText();
+
+	 this->ip = ip;
+	 this->port = port;
+	 this->pathDirectory = path;
 	 this->name = name; /*Set Name.*/
 
-	 mkdir("/home/randy/git/TECMFS/TECMFS/DiskT", 0700); /*Make the Directory with the given path.*/
+	 cout << pathDirectory << endl;
+
+	 //mkdir("/home/randy/git/TECMFS/TECMFS/DiskT/", 0700); /*Make the Directory with the given path.*/
+
+	 mkdir(pathDirectory, 0700); /*Make the Directory with the given path.*/
 
 	 const char *pathBlockA="/home/randy/git/TECMFS/TECMFS/DiskT/BlockA.txt"; /*Create the path and the file for the blocks to be saved.*/
 	 const char *pathBlockB="/home/randy/git/TECMFS/TECMFS/DiskT/BlockB.txt"; /*Create the path and the file for the blocks to be saved.*/
@@ -66,18 +78,18 @@ Disk::~Disk() {
 /**
  * Return the IP number of the Disk.
  *
- * @return ip string
+ * @return ip const char *
  */
-string Disk::getIP(){
+const char *  Disk::getIP(){
 	return ip;
 }
 
 /**
  * Return the Port number of the Disk.
  *
- * @return port int
+ * @return port const char *
  */
-int Disk::getPort(){
+const char *  Disk::getPort(){
 	return port;
 }
 
@@ -94,9 +106,9 @@ const char * Disk::getPathDirectory(){
 /**
  * Return the name of the Disk.
  *
- * @return name char
+ * @return name string
  */
-char Disk::getName(){
+string Disk::getName(){
 	return name;
 }
 
@@ -145,14 +157,6 @@ Block Disk::getBlockC(){
  */
 Block Disk::getBlockP(){
 	return blockP;
-}
-
-
-/**
- *
- */
-void Disk::readXMLConfig(){
-
 }
 
 /**

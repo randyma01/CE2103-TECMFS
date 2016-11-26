@@ -8,23 +8,30 @@
 #ifndef TECMFS_RAID5_DISK_H_
 #define TECMFS_RAID5_DISK_H_
 
+#ifndef XMLCheckResult
+	#define XMLCheckResult(a_eResult) if (a_eResult != XML_SUCCESS) { printf("Error: %i\n", a_eResult); return a_eResult; }
+#endif
+
 #include "Block.h"
+#include "tinyxml2.h"
 
 #include <iostream>
 #include <fstream>
 #include <vector>
 
+using namespace tinyxml2;
 using namespace std;
 
 class Disk {
 
 private:
 	/*Attributes*/
-	string ip; /*IP number for the Disk.*/
-	int port; /*PORT number of the Disk.*/
-	const char * pathDirectory = "/home/randy/git/TECMFS/TECMFS"; /*Path of the location of the save data.*/
-	char name; /*Name of the Disk.*/
+	const char * ip; /*IP number for the Disk.*/
+	const char * port; /*PORT number of the Disk.*/
+	const char * pathDirectory; /*Path of the location of the save data.*/
+	string name; /*Name of the Disk.*/
 	int size = 40000000; /*Size of the Disk.*/
+	//XMLDocument doc; /*Instance for reading the xml file.*/
 
 	vector<Block> vectorBlocks;/*Vector full of the Blocks of the Disk.*/
 	Block blockA; /*First or Block A of the Disk.*/
@@ -35,28 +42,21 @@ private:
 
 
 public:
-
 	/*Methods*/
 	Disk(); /*Constructor.*/
-	Disk(char name); /*+++++++++++++.*/
+	Disk(string name); /*+++++++++++++.*/
 	virtual ~Disk(); /*Destroyer.*/
 
 	/*Getters*/
-	string getIP();
-	int getPort();
+	const char *  getIP();
+	const char *  getPort();
 	const char * getPathDirectory();
-	char getName();
+	string getName();
 	vector<Block> getVectorBlocks();
 	Block getBlockA();
 	Block getBlockB();
 	Block getBlockC();
 	Block getBlockP();
-
-	/*Setters*/
-	void setIP(string ip);
-	void setPort(int port);
-	void setPath(char path);
-	void setName(char name);
 
 	/*Functions of the disk.*/
 	void readXMLConfig(); /*Reads the XML for the IP and the path for the Disk.*/
