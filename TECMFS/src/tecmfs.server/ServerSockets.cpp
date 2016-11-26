@@ -60,7 +60,7 @@ ServerSockets::~ServerSockets() {
  * Starts the connection with the Client.
  */
 void ServerSockets::run(){
-	int p;
+	/*Loop for the conncetion.*/
 	while(true){
 		int socketClient;
 		struct sockaddr_in cli_addr;
@@ -70,24 +70,17 @@ void ServerSockets::run(){
 			 break;
 		}
 
-//		p = fork();
-//		if(p < 0){
-//			exit(-1);
-//			break;
-//		}
-
 		int buffsize = (MAXDATA);
 		setsockopt(socketClient, SOL_SOCKET, SO_RCVBUF, &buffsize, sizeof(buffsize));
 		setsockopt(socketClient, SOL_SOCKET, SO_SNDBUF, &buffsize, sizeof(buffsize));
 
-		//anadir el cliente Node al vector
+		/*1. Adds new client Node to the Vector.*/
 		if (receiveMSG(socketClient) == "DiskNode"){
 			socketNode.push_back(socketClient);
 			sendMSG(socketClient, "agregado como nodo");
 			cout << "cantidad de clientes: " << ((int)socketNode.size()) << endl;
 		}
-		//verifica si el Node va ser borrado
-		//cierra la conexion y lo borra del vector
+		/*2. Check if the Nide will be erase. If so, closes the conecctiona and deletes the client Node from the Server.*/
 		for(int i = 0; i < (int)socketNode.size(); i++){
 			if (receiveMSG(socketNode.operator [](i)) == "BorrarNode"){
 				close(socketNode.operator [](i));
@@ -95,13 +88,17 @@ void ServerSockets::run(){
 			}
 		}
 
+		/*3. Conditions for the messages received.*/
+
+			/*- Option for: "Upload Video".*/
 		if(receiveMSG(socketClient) == "UploadVideo"){
 			sendMSG(socketClient, "Solicitud Procesada");
 
 			sleep(5);
 
 			string binaryVideo = receiveMSG(socketClient);
-			cout << binaryVideo << endl;
+			//cout << binaryVideo << endl;
+
 			int lengCut = (binaryVideo.length()) / 6;
 			while(binaryVideo != ""){
 				string cut = binaryVideo.substr(0, lengCut);
@@ -119,14 +116,20 @@ void ServerSockets::run(){
 
 		}
 
+			/*- Option for: "".*/
 		if(receiveMSG(socketClient) == "E"){
 
 			sendMSG(socketNode.operator [](1), "prueba enviar dato al node 2");
 		}
 
+
+
+			/*- Option for: "Streaming".*/
 		if(receiveMSG(socketClient) == "Streaming"){
-			cout << "el mae quiere hacer streaming\n";
+
 		}
+
+			/*- Option for: "SetMetaData".*/
 		if(receiveMSG(socketClient) == "SetMetaData"){
 			cout << "el mae quiere cambiar la metada" << endl;
 			//mostrar metada del video que quiere con

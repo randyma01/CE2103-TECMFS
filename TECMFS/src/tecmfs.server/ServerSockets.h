@@ -59,6 +59,10 @@ private:
 	int socketServer; /*Socket integer manager.*/
 	socklen_t cliLen; /*Socket client.*/
 
+	ControllerNode controllerNode = ControllerNode(); /*Controller Node for the data and the Disk Nodes.*/
+	Collections collection =  Collections(); /*Collections for all the new data incoming.*/
+
+
 	/*Methods.*/
 	void sendMSG(int client, string msg); /*Send messages to the client.*/
 	string receiveMSG(int client); /*Receive messages from the client.*/

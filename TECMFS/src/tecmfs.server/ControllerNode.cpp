@@ -15,9 +15,15 @@
 
 using namespace std;
 
+/**
+ * Constructor.
+ */
 ControllerNode::ControllerNode() {
 }
 
+/**
+ * Destroyer.
+ */
 ControllerNode::~ControllerNode() {
 }
 
