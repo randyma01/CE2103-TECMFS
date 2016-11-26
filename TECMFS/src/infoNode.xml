@@ -1,14 +1,14 @@
 <?xml version="1.0" ?>
 <diskNode>
-	<config>	
-		<ip>
-			"0.0.0.0"
-		</ip>
-		<port>
-			8080
-		</port>
-		<path>
-			"ubicación"
-		</path>
-	</config>
+<config>	
+	<ip>
+	"0.0.0.0"
+	</ip>
+	<port>
+	8080
+	</port>
+	<path>
+	"ubicación"
+	</path>
+</config>
 </diskNode>
