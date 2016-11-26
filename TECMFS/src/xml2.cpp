@@ -31,7 +31,8 @@ int main() {
 	const char* ip = doc.FirstChildElement( "diskNode" )->FirstChildElement("config")->FirstChildElement("ip")->GetText();
 	const char* port = doc.FirstChildElement( "diskNode" )->FirstChildElement("config")->FirstChildElement("port")->GetText();
 	const char* path = doc.FirstChildElement( "diskNode" )->FirstChildElement("config")->FirstChildElement("path")->GetText();
-	printf( "ip: %s\n", ip );
-	printf( "port: %s\n", port );
-	printf( "path: %s\n", path );
+
+	cout<<ip<<endl;
+	cout<<port<<endl;
+	cout<<path<<endl;
 }
