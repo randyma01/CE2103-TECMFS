@@ -26,6 +26,12 @@
 #include <stdio.h>
 #include <vector>
 
+#include "Document.h"
+#include "Collections.h"
+#include "ControllerNode.h"
+
+
+
 #define MAXDATA 64000000
 #define MAXCONNECTIONS 5
 #define PORT 8080
@@ -53,7 +59,7 @@ private:
 	int socketServer; /*Socket integer manager.*/
 	socklen_t cliLen; /*Socket client.*/
 
-	/*.*/
+	/*Methods.*/
 	void sendMSG(int client, string msg); /*Send messages to the client.*/
 	string receiveMSG(int client); /*Receive messages from the client.*/
 

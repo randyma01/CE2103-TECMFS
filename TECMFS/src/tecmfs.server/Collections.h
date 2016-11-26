@@ -32,8 +32,8 @@ class Collections {
 
 private:
 	/*Attributes*/
-	vector <Document> documentVector; /*Vector that manage all the the Documents.*/
-	string name = "Collection."; /*Set the name of the Collection.*/
+	vector <Document> documentsVector; /*Vector that manage all the the Documents.*/
+	string name = "Collection"; /*Set the name of the Collection.*/
 
 public:
 	/*Methods*/
@@ -44,12 +44,9 @@ public:
 	string getName();
 	vector <Document> getDocumentVector();
 
-	/*Setters*/
-	void setName(string name);
-
 	/*Functions*/
 	void addDocument(Document newValue); /*Insert a new document in the Collection's List.*/
-	void deleteDocument(Document delData); /*Delete a Document inside the Collection's List.*/
+	void deleteDocument(string delName); /*Delete a Document inside the Collection's List.*/
 	void printCollection(); /*Prints the entire Collection's List.*/
 	Document searchDocument(string name); /*Searches a Document inside the list.*/
 
