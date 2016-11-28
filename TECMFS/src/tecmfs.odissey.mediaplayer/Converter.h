@@ -52,6 +52,7 @@ public:
 	string sendVideo();
 	void receiveVideo(string dataBin);
 	void videoDecompress();
+	int byteVideo(const char *path);
 
 	string binaryToAscii(string input);
 
