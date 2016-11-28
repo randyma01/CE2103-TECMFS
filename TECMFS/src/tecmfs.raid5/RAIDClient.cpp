@@ -73,7 +73,7 @@ string RAIDClient::receiveMsj(){
 	setsockopt(descriptor, SOL_SOCKET, SO_RCVBUF, &buffsize, sizeof(buffsize));
 
 	char *buffer = new char[MAXDATASIZE];
-	int r = recv(descriptor, buffer, MAXDATASIZE, MSG_PEEK);
+	int r = recv(descriptor, buffer, MAXDATASIZE, 0);
 	if (r < 0){
 		cout<<"ERROR reading from socket"<<endl;
 	}

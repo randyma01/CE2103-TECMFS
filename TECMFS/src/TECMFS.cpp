@@ -41,40 +41,42 @@ using namespace tinyxml2;
 int main() {
 	cout << "!!!Hello TECMFS!!!" << endl; // prints !!!Hello World!!!
 
-	RAIDClient cliente1;
-	cliente1.startConnection();
-	cout << cliente1.receiveMsj() << endl;
-	cliente1.sendMsj("DiskNode");
-	cout << cliente1.receiveMsj() << endl;
+	Disk disk1 = Disk("D1");
+
+	RAIDClient diskNode1; /*RAIDCient object for connections.*/
+
+	diskNode1.startConnection(); /*Connection with the Server.*/
+	cout << diskNode1.receiveMsj() << endl;
+
+	diskNode1.sendMsj("DiskNode"); /*Sets this client as a Disk Node.*/
+
+	int posVec = 0; /*Positions of the Vector of all the Blocks.*/
+	while(true){
+		string msj = diskNode1.receiveMsj();
+		if(msj == " Holili" ){
+			break;
+		}
+
+		else if(msj == "SaveData"){
+			string data = diskNode1.receiveMsj();
+			disk1.saveDataBlock(data, posVec);
+			posVec++;
+		}
+
+		else if(msj == "SendData"){
+
+		}
+	}
 
 
-//	XMLDocument doc;
-//	doc.LoadFile("configurationNode.xml");
-//
-//	const char* ip = doc.FirstChildElement( "diskNode" )->FirstChildElement("config")->FirstChildElement("ip")->GetText();
-//	const char* port = doc.FirstChildElement( "diskNode" )->FirstChildElement("config")->FirstChildElement("port")->GetText();
-//	const char* path = doc.FirstChildElement( "diskNode" )->FirstChildElement("config")->FirstChildElement("path")->GetText();
-//
-//	cout<<ip<<endl;
-//	cout<<port<<endl;
-//	cout<<path<<endl;
-
-
-//	ServerSockets controllerS;
-//	controllerS.run();
-
-
-
-
-//	ControllerNode bana;
-//
+// ControllerNode bana; /*Controller Node object for managing the data.*/
 //	string A = "110101";
 //	string B = "111111";
 //	string C = "010101";
 //	string paridadTemporal = bana.superXOR(A,B);
 //	string paridadFinal = bana.superXOR(paridadTemporal,C);
 //
-//    Disk disco = Disk("H");
+ //   Disk disco = Disk("H");
 //
 //	disco.saveDataBlock(A, 0);
 //	disco.saveDataBlock(B, 1);
@@ -85,11 +87,6 @@ int main() {
 //
 //	cout << A2 << endl;
 
-
-//
-//	//quiro recuperar C, por medio de los restantes A, B paridadFinal
-//	string newC = bana.parityMgmt(C, B, paridadFinal);
-//	cout << newC << endl;
 
 
 
