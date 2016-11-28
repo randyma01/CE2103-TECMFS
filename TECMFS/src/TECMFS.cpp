@@ -35,13 +35,12 @@
 using namespace std;
 using namespace tinyxml2;
 
+
+
 int main() {
 	cout << "!!!Hello TECMFS!!!" << endl; // prints !!!Hello World!!!
 
-//	const char* a = "r";
-//	const char *y = "/home/randy/git/TECMFS/TECMFS/DiskT/BlockA" + *a;
-//
-//	cout << y;
+
 //	XMLDocument doc;
 //	doc.LoadFile("configurationNode.xml");
 //
@@ -52,14 +51,14 @@ int main() {
 //	cout<<ip<<endl;
 //	cout<<port<<endl;
 //	cout<<path<<endl;
-//
-//	int port2 = *port;
-//
-//	cout << port2 << endl;
+
 
 //	ServerSockets controllerS;
 //	controllerS.run();
-//
+
+
+
+
 	ControllerNode bana;
 
 	string A = "110101";
@@ -74,6 +73,10 @@ int main() {
 	disco.saveDataBlock(B, 1);
 	disco.saveDataBlock(C, 2);
 	disco.saveDataBlock(paridadTemporal, 3);
+
+	string A2 = disco.sendDataDisk();
+
+	cout << A2 << endl;
 
 
 //
