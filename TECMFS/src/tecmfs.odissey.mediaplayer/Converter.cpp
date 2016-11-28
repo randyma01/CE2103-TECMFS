@@ -172,3 +172,18 @@ string Converter::binaryToAscii(string input){
 	}
 	return ascii;
 }
+
+
+int Converter::byteVideo(const char* path){
+    ifstream fileToCompress(path, ios::in|ios::binary|ios::ate);
+    streampos size;
+    char *data;
+    size = fileToCompress.tellg();
+    data = new char[size];
+    fileToCompress.seekg(0, ios::beg);
+    fileToCompress.read(data, size);
+    fileToCompress.close();
+    delete[] data;
+    return (int)size;
+
+}
