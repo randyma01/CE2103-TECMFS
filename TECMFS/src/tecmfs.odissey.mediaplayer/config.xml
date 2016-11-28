@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<OdisseyMediaPlayer>
+  <Config>
+      <IP>"172.65.46.84"</IP>
+      <Port>8080</Port>
+  </Config>
+</OdisseyMediaPlayer>
