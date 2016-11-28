@@ -26,9 +26,16 @@
 #include <string>
 #include <sys/stat.h>
 
+#include "tinyxml2.h"
+
+#ifndef XMLCheckResult
+	#define XMLCheckResult(a_eResult) if (a_eResult != XML_SUCCESS) { printf("Error: %i\n", a_eResult); return a_eResult; }
+#endif
+
 
 #define MAXDATASIZE 64000000
 
+using namespace tinyxml2;
 using namespace std;
 
 /**
@@ -48,7 +55,7 @@ public:
 	virtual ~RAIDClient(); /*Destroyer.*/
 
 
-	int startConnection(string host, int port); /*Makes Connections.*/
+	int startConnection(); /*Makes Connections.*/
 	string receiveMsj(); /*Receive messages from the Server.*/
 	void sendMsj(string mensaje); /*Send message to the Server.*/
 	char getBuffer(); /*Manager for the buffer.*/

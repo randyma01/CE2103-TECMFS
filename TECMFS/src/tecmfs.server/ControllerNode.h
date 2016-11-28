@@ -29,6 +29,7 @@ public:
 	string XOR(char a, char b); /*Makes the XOR logical function.*/
 	string fillOnes(string str,int cant); /*Filled with ones.*/
 	string superXOR(string a,string b); /*Obtain the parity given two binary strings.*/
+
 	string parityMgmt(string a, string b, string c); /*Recover the last information from the rest.*/
 };
 

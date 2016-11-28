@@ -29,8 +29,15 @@ RAIDClient::~RAIDClient() {
  *
  * @params string hostIP, int port
  */
-int RAIDClient::startConnection(string hostIP, int port) {
-	const char *host = hostIP.c_str();
+int RAIDClient::startConnection(){
+	XMLDocument doc;
+	doc.LoadFile("configurationNode.xml");
+	const char* host = doc.FirstChildElement( "diskNode" )->FirstChildElement("config")->FirstChildElement("ip")->GetText();
+	string portC = doc.FirstChildElement( "diskNode" )->FirstChildElement("config")->FirstChildElement("port")->GetText();
+
+	int port = atoi(portC.c_str());
+	//const char *host = hostIP.c_str();
+
 	struct hostent *hostC;
 	struct sockaddr_in server;
 	if ((hostC = gethostbyname(host)) == NULL){

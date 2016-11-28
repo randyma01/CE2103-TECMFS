@@ -23,6 +23,7 @@
 #include "tecmfs.raid5/tinyxml2.h"
 #include "tecmfs.raid5/Block.h"
 #include "tecmfs.raid5/Disk.h"
+#include "tecmfs.raid5/RAIDClient.h"
 #include "tecmfs.server/Document.h"
 #include "tecmfs.server/Collections.h"
 #include "tecmfs.server/ServerSockets.h"
@@ -39,6 +40,12 @@ using namespace tinyxml2;
 
 int main() {
 	cout << "!!!Hello TECMFS!!!" << endl; // prints !!!Hello World!!!
+
+	RAIDClient cliente1;
+	cliente1.startConnection();
+	cout << cliente1.receiveMsj() << endl;
+	cliente1.sendMsj("DiskNode");
+	cout << cliente1.receiveMsj() << endl;
 
 
 //	XMLDocument doc;
@@ -59,24 +66,24 @@ int main() {
 
 
 
-	ControllerNode bana;
-
-	string A = "110101";
-	string B = "111111";
-	string C = "010101";
-	string paridadTemporal = bana.superXOR(A,B);
-	string paridadFinal = bana.superXOR(paridadTemporal,C);
-
-    Disk disco = Disk("H");
-
-	disco.saveDataBlock(A, 0);
-	disco.saveDataBlock(B, 1);
-	disco.saveDataBlock(C, 2);
-	disco.saveDataBlock(paridadTemporal, 3);
-
-	string A2 = disco.sendDataDisk();
-
-	cout << A2 << endl;
+//	ControllerNode bana;
+//
+//	string A = "110101";
+//	string B = "111111";
+//	string C = "010101";
+//	string paridadTemporal = bana.superXOR(A,B);
+//	string paridadFinal = bana.superXOR(paridadTemporal,C);
+//
+//    Disk disco = Disk("H");
+//
+//	disco.saveDataBlock(A, 0);
+//	disco.saveDataBlock(B, 1);
+//	disco.saveDataBlock(C, 2);
+//	disco.saveDataBlock(paridadTemporal, 3);
+//
+//	string A2 = disco.sendDataDisk();
+//
+//	cout << A2 << endl;
 
 
 //
