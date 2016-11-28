@@ -34,7 +34,6 @@ using namespace std;
 /**
  * Class for the creation for a C/C++ socket for the RAID 5
  * memory storage system.
- *
  */
 
 class RAIDClient {

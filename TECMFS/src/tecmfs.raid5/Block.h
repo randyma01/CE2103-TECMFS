@@ -13,6 +13,11 @@
 
 using namespace std;
 
+/**
+ * Block class object represent a block inside the Disk Node.
+ * It's literal representation is a file, .txt. All data is
+ * written, read, save, and deleted from it.
+ */
 class Block {
 
 private:

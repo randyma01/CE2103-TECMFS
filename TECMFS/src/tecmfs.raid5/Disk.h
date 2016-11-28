@@ -22,6 +22,12 @@
 using namespace tinyxml2;
 using namespace std;
 
+/**
+ *Disk class object represent the entire Disk Node from the RAID
+ *5 Architecture. It's represensation is directory, where all the
+ *Block files are stored. ALl the data saved to the files is managed
+ *by the Disk.
+ */
 class Disk {
 
 private:
