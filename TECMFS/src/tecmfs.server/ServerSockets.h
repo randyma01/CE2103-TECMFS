@@ -31,7 +31,6 @@
 #include "ControllerNode.h"
 
 
-
 #define MAXDATA 64000000
 #define MAXCONNECTIONS 5
 #define PORT 8080

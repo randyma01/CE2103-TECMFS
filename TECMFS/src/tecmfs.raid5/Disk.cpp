@@ -190,7 +190,7 @@ string Disk::sendDataDisk(){
 	dataB = vectorBlocks.at(1).getData();
 	dataC = vectorBlocks.at(2).getData();
 	allData = dataA + dataB + dataC;
-	this->cleanDisk();
+	//this->cleanDisk();
 	return allData;
 }
 

@@ -25,8 +25,8 @@ using namespace std;
 
 /**
  *A Collection stand as a group of Document. This class
- *manages a series Documents saving them on a Single
- *Linked List.
+ *manages a series Documents saving them on a Vector. All operations
+ *to be made on the Documents are handle by this class.
  */
 class Collections {
 
