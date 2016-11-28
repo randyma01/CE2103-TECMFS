@@ -11,68 +11,78 @@
 #include <stdlib.h>
 #include <iostream>
 #include <string>
+#include <string.h>
+#include <strings.h>
+#include <fstream>
+#include <cstring>
+#include <cstddef>
+#include <vector>
 
 
-#include <qmainwindow.h>
-#include <qaction.h>
-#include <qlayout.h>
-#include <qmenu.h>
-#include <qmenubar.h>
-#include <qstatusbar.h>
-#include <qtextedit.h>
-#include <qfile.h>
-#include <qdatastream.h>
-#include <qfiledialog.h>
-#include <qmessagebox.h>
-#include <qsignalmapper.h>
-#include <qapplication.h>
-#include <qpainter.h>
-#include <QMouseEvent>
-#include <qlineedit.h>
-#include <qcombobox.h>
-#include <qlabel.h>
-#include <qtoolbar.h>
-#include <qpushbutton.h>
-#include <qobjectdefs.h>
+#include <QMainWindow>
+#include <QProgressBar>
+#include <QTextEdit>
+#include <QLineEdit>
+#include <QKeyEvent>
 
+
+#include "player.h"
 
 using namespace std;
 
-//#redefine  Q_OBJECT
-
-class mainWindow : public QMainWindow{
-
-	Q_OBJECT_GETSTATICMETAOBJECT
-
-	public:
-	 	 mainWindow();
-	 	 virtual ~mainWindow();
-	 	 void setupMenuBar();
-
-	signals:
-		void openSig();
-
-    public Q_SLOTS:
-		void openFile();
 
 
-    protected:
-		#ifndef QT_NO_CONTEXTMENU
-			void contextMenuEvent(QContextMenuEvent *event);
-		#endif /*QT_NO_CONTEXTMENU*/
+namespace Ui {
+class MainWindow;
+}
 
-    public:
-			QActionGroup *alignmentGroup;
+class MainWindow : public QMainWindow
+{
+    Q_OBJECT
 
-	private:
-		void createActions();
-		void createMenus();
-		bool load(const QString &f);
-
-		QMenu *fileMenu;
+public:
+    explicit MainWindow(QWidget *parent = 0);
+    ~MainWindow();
+    QString path;
 
 
-		QAction *openAct;
+private slots:
+    //File
+    void openFile();
+    void updateProgress();
+    void uploadFile();
+
+
+    //Edit
+    void editSearch();
+    void getNameSearchEdit();
+
+    //Streaming
+    void streamingSearch();
+    void getNameSearchStreaming();
+
+    //Help
+    void helpOdssMP();
+
+    //About
+    void aboutProject();
+    void aboutOdssMP();
+
+    //Control Panel(Buttons)
+    void on_playButton_pressed();
+    void on_stopButton_pressed();
+    void on_advanceButton_pressed();
+    void on_stopAllButton_pressed();
+    void on_backButton_pressed();
+    void updatePlayerUi(QImage img);
+
+
+private:
+    void invisibleAll();
+private:
+    Ui::MainWindow *ui;
+    Player *player;
+    QLineEdit *search;
 
 };
 
