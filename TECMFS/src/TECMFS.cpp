@@ -42,56 +42,52 @@ int main() {
 	cout << "!!!Hello TECMFS!!!" << endl; // prints !!!Hello World!!!
 
 
+	/******Objects******/
+	Disk disk1 = Disk("D1"); /*New Disk for this Client.*/
+	RAIDClient diskNode1; /*RAIDCient object for connections.*/
+	/******************/
 
+	diskNode1.startConnection(); /*Connection with the Server.*/
+	cout << diskNode1.receiveMsj() << endl; /*Print on screen message of succesful connection.*/
+	diskNode1.sendMsj("DiskNode"); /*Sets this client as a Disk Node.*/
 
-	Disk disk1 = Disk("D1");
-//
-//	RAIDClient diskNode1; /*RAIDCient object for connections.*/
-//
-//	diskNode1.startConnection(); /*Connection with the Server.*/
-//	cout << diskNode1.receiveMsj() << endl;
-//
-//	diskNode1.sendMsj("DiskNode"); /*Sets this client as a Disk Node.*/
-//
-//	int posVec = 0; /*Positions of the Vector of all the Blocks.*/
-//	while(true){
-//		string msj = diskNode1.receiveMsj();
-//
-//		/*To save the information.*/
-//		if(msj == "SaveData"){
-//			string data = diskNode1.receiveMsj(); /*Receives data from the Server's Controller Node.*/
-//			disk1.saveDataBlock(data, posVec); /*Saves the data at the Blocks's position in the Vector.*/
-//			posVec++;
-//		}
-//
-//		/*To save the parity.*/
-//		else if(msj == "SaveParity"){
-//			string parity = diskNode1.receiveMsj(); /*Receives the parity from the .*/
-//			disk1.saveParity(parity); /*Saves the parity at the Block of the parity.*/
-//		}
-//
-//		/*To send the data.*/
-//		else if(msj == "SendData"){
-//			string data1 = disk1.sendDataDisk(); /*Saves all the data from the Disk (all Blocks).*/
-//			diskNode1.sendMsj(data1); /*Send the data to the Server's Controller Node.*/
-//		}
-//
-//		/*To send the parity of the Disk (if it exists).*/
-//		else if(msj == "Send Parity"){
-//			string parity = disk1.sendParityDisk(); /*Gets the parity as a string.*/
-//			diskNode1.sendMsj(parity); /*Send the parity to the Server's Controlle Node.*/
-//		}
-//		/*To delete information.*/
-//		else if(msj == "DeleteDisk"){
-//			disk1.cleanDisk(); /*Deletes all the data from the Disk.*/
-//			diskNode1.sendMsj("DeleteNode");
-//			//debería desconectarse
-//		}
-//	}
+	int posVec = 0; /*Positions of the Vector of all the Blocks.*/
+	while(true){
+		string msj = diskNode1.receiveMsj(); /*Message receive from the Server for iteractions..*/
 
+		/*To save the information.*/
+		if(msj == "SaveData"){
+			string data = diskNode1.receiveMsj(); /*Receives data from the Server's Controller Node.*/
+			cout << "Printing length of the data: " << data.length() << endl; /*FLAG*/
+			disk1.saveDataBlock(data, posVec); /*Saves the data at the Blocks's position in the Vector.*/
+			cout << "Saved data!" << endl; /*FLAG*/
+			posVec++;
+		}
 
+		/*To save the parity.*/
+		else if(msj == "SaveParity"){
+			string parity = diskNode1.receiveMsj(); /*Receives the parity from the .*/
+			disk1.saveParity(parity); /*Saves the parity at the Block of the parity.*/
+		}
 
+		/*To send the data.*/
+		else if(msj == "SendData"){
+			string data1 = disk1.sendDataDisk(); /*Saves all the data from the Disk (all Blocks).*/
+			diskNode1.sendMsj(data1); /*Send the data to the Server's Controller Node.*/
+		}
 
+		/*To send the parity of the Disk (if it exists).*/
+		else if(msj == "Send Parity"){
+			string parity = disk1.sendParityDisk(); /*Gets the parity as a string.*/
+			diskNode1.sendMsj(parity); /*Send the parity to the Server's Controlle Node.*/
+		}
+		/*To delete information.*/
+		else if(msj == "DeleteDisk"){
+			disk1.cleanDisk(); /*Deletes all the data from the Disk.*/
+			diskNode1.sendMsj("DeleteNode");
+			//debería desconectarse
+		}
+	}
 	return 0;
 }
 

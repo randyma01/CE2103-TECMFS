@@ -25,6 +25,7 @@ Block::Block(){
  */
 Block::Block(char name, const char *path) {
 	this->path = path; /*Set the path for the file, assing from the Disk.*/
+	cout << "(Block.cpp - Block() ) Path of the saving Block: " << path << endl; /*FLAG*/
 	this->ID = generateID(); /*Set an ID for this ID block.*/
 	this->size = 10000000; /*Set the size of the block, amounts in bytes.*/
 	this->name = name; /*Set the name of the block.*/
@@ -80,11 +81,12 @@ char Block::getName(){
 void Block::saveData(string data){
 	string id = this->getID();
 	const char * path = this->getPath();
+	cout << "(At Block.cpp - saveData() ) Path of the saving Block: " <<  this->getPath() << endl; /*FLAG*/
 	fstream myfile(path, fstream::in|fstream::out|fstream::app);
 	if (myfile.is_open()){
 		myfile << data << endl;
 		myfile.close();
-		cout << "All data was written and saved." << endl;
+		cout << "All data was written and saved." << endl; /*FLAG*/
 	}else{
 		cout << "Unable to open file.";
 	}

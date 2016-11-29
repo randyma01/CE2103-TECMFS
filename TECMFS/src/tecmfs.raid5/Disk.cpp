@@ -45,15 +45,14 @@ Disk::Disk() {
 
 	 this->name = name; /*Set Name.*/
 
-	 cout <<  "Path of the Disk: " << pathDirectory << pathDirectory[15] <<endl;
-
-	 //mkdir("/home/randy/git/TECMFS/TECMFS/DiskT/", 0700); /*Make the Directory with the given path.*/
+	 cout <<  "Path of the Disk: " << pathDirectory << endl; /*FLAG*/
 
 	 mkdir(pathDirectory, 0700); /*Make the Directory with the given path.*/
 
 	 /*Create the path and the file for the Blocks to be saved.*/
 	 /*A: Block A*/
 	 string a = path + "/BlockA.txt";
+	 cout <<  "Path of the Block A: " << a << endl; /*FLAG*/
 	 const char *pathBlockA= a.c_str(); /*Create the path and the file for the blocks to be saved.*/
 
 	 /*B: Block B*/
@@ -68,14 +67,6 @@ Disk::Disk() {
 	 string p = path + "/BlockP.txt";
 	 const char *pathBlockP= p.c_str(); /*Create the path and the file for the blocks to be saved.*/
 
-
-//	 /*Files -> paths*/
-//	 const char *pathBlockA= "/home/randy/DiskT/BlockA.txt"; /*Create the path and the file for the blocks to be saved.*/
-//	 const char *pathBlockB="/home/randy/DiskT/BlockB.txt"; /*Create the path and the file for the blocks to be saved.*/
-//	 const char *pathBlockC="/home/randy/DiskT/BlockC.txt"; /*Create the path and the file for the blocks to be saved.*/
-//	 const char *pathBlockP="/home/randy/DiskT/BlockP.txt"; /*Create the path and the file for the blocks to be saved.*/
-
-
 	 /*Set the blocks.*/
 	 this->blockA = Block('A', pathBlockA); /*Block A.*/
 	 this->blockB = Block('B', pathBlockB); /*Block B.*/
@@ -87,7 +78,6 @@ Disk::Disk() {
 	 vectorBlocks.push_back(blockB);
 	 vectorBlocks.push_back(blockC);
 	 vectorBlocks.push_back(blockP);
-
  }
 
 
