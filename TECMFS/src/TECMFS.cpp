@@ -53,29 +53,45 @@ int main() {
 	int posVec = 0; /*Positions of the Vector of all the Blocks.*/
 	while(true){
 		string msj = diskNode1.receiveMsj();
-		if(msj == " Holili" ){
-			break;
-		}
 
-		else if(msj == "SaveData"){
-			string data = diskNode1.receiveMsj();
-			disk1.saveDataBlock(data, posVec);
+		/*To save the information.*/
+		if(msj == "SaveData"){
+			string data = diskNode1.receiveMsj(); /*Receives data from the Server's Controller Node.*/
+			disk1.saveDataBlock(data, posVec); /*Saves the data at the Blocks's position in the Vector.*/
 			posVec++;
 		}
 
-		else if(msj == "SendData"){
+		/*To save the parity.*/
+		else if(msj == "SaveParity"){
+			string parity = diskNode1.receiveMsj(); /*Receives the parity from the .*/
+			disk1.saveParity(parity); /*Saves the parity at the Block of the parity.*/
+		}
 
+		/*To send the data.*/
+		else if(msj == "SendData"){
+			string data1 = disk1.sendDataDisk(); /*Saves all the data from the Disk (all Blocks).*/
+			diskNode1.sendMsj(data1); /*Send the data to the Server's Controller Node.*/
+		}
+
+		/*To send the parity of the Disk (if it exists).*/
+		else if(msj == "Send Parity"){
+			string parity = disk1.sendParityDisk(); /*Gets the parity as a string.*/
+			diskNode1.sendMsj(parity); /*Send the parity to the Server's Controlle Node.*/
+		}
+		/*To sn*/
+		else if(msj == "DeleteDisk"){
+			disk1.cleanDisk();
 		}
 	}
 
 
-// ControllerNode bana; /*Controller Node object for managing the data.*/
-//	string A = "110101";
-//	string B = "111111";
-//	string C = "010101";
-//	string paridadTemporal = bana.superXOR(A,B);
-//	string paridadFinal = bana.superXOR(paridadTemporal,C);
-//
+	ControllerNode bana; /*Controller Node object for managing the data.*/
+	string A = "110101";
+	string B = "111111";
+	string C = "010101";
+	string paridadTemporal = bana.superXOR(A,B);
+	string paridadFinal = bana.superXOR(paridadTemporal,C);
+
  //   Disk disco = Disk("H");
 //
 //	disco.saveDataBlock(A, 0);

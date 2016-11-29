@@ -186,6 +186,8 @@ void Disk::saveParity(string parity){
 /**
  *Takes from the Disk's Blocks all information
  *and keep the Blocks empty.
+ *
+ *@return allData string
  */
 string Disk::sendDataDisk(){
 	string allData, dataA, dataB, dataC;
@@ -197,6 +199,17 @@ string Disk::sendDataDisk(){
 	return allData;
 }
 
+/**
+ * Send the parity, as a string, of the Disk, if the Disk
+ * has it.
+ *
+ * @return parity string
+ */
+string Disk::sendParityDisk(){
+	string parity;
+	parity = vectorBlocks.at(3).getData();
+	return parity;
+}
 
 
 /**

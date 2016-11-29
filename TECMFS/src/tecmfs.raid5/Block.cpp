@@ -84,8 +84,10 @@ void Block::saveData(string data){
 	if (myfile.is_open()){
 		myfile << data << endl;
 		myfile.close();
+		cout << "All data was written and saved." << endl;
+	}else{
+		cout << "Unable to open file.";
 	}
-	else cout << "Unable to open file.";
 }
 
 /**

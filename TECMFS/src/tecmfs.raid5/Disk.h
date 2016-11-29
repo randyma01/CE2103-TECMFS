@@ -66,14 +66,15 @@ public:
 
 	/*Functions of the disk.*/
 	void readXMLConfig(); /*Reads the XML for the IP and the path for the Disk.*/
-	void saveDataBlock(string data, int i); /*Save the data into the block.*/
+	void saveDataBlock(string data, int i); /*Save the data into the Block.*/
 	void saveParity(string parity); /*Sava the parity.*/
-	string sendDataDisk(); /*Send the data that has in the file.*/
+	string sendDataDisk(); /*Send the data that has in the Disk.*/
+	string sendParityDisk(); /*Send the parity from the Disk*/
 	void cleanDisk(); /*Erase all data from blocks.*/
-	bool checkSize(); /*Check if there is free space in the disk. (Checks all blocks)*/
-	int getSizeDisk(); /*Returns the actual size of the disk by adding the data from all the blocks.*/
-	void deleteBlock(int i); /*Delete the desire block with all information related to it.*/
-	void deleteDisc(); /*Delete this disk with all information related to it.*/
+	bool checkSize(); /*Check if there is free space in the disk. (Checks all Blocks)*/
+	int getSizeDisk(); /*Returns the actual size of the Disk by adding the data from all the Blocks.*/
+	void deleteBlock(int i); /*Delete the desire Block with all information related to it.*/
+	void deleteDisc(); /*Delete this Disk with all information related to it.*/
 
 };
 
