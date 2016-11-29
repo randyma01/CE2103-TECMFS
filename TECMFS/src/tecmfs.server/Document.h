@@ -42,7 +42,7 @@ private:
 public:
 	/*Methods.*/
 	Document(); /*Consturctor.*/
-	Document (string name); /*Destoyer.*/
+	Document (string name, int size); /*Destoyer.*/
 	virtual ~Document();
 
 	/*Getters.*/

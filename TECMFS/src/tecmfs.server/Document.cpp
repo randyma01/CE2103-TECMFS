@@ -10,8 +10,9 @@
 Document::Document() {
 }
 
-Document::Document(string name){
+Document::Document(string name, int size){
 	this->name = name;
+	this->size = size;
 }
 
 Document::~Document() {

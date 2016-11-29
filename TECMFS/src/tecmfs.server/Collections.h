@@ -48,7 +48,7 @@ public:
 	void addDocument(Document newValue); /*Insert a new document in the Collection's List.*/
 	void deleteDocument(string delName); /*Delete a Document inside the Collection's List.*/
 	void printCollection(); /*Prints the entire Collection's List.*/
-	Document searchDocument(string name); /*Searches a Document inside the list.*/
+	bool searchDocument(string name); /*Searches a Document inside the list.*/
 
 };
 

@@ -83,13 +83,13 @@ void Collections::printCollection(){
  * @param name string
  * @return doc Document
  */
-Document Collections::searchDocument(string name){
-	Document doc;
+bool Collections::searchDocument(string name){
+	bool answer = false;
 	for(int i = 0; i< (int) documentsVector.size(); i++){
 		if(name == documentsVector.at(i).getName()){
-			doc = documentsVector.at(i);
+			answer = true;
 			break;
 		}
 	}
-	return doc;
+	return answer;
 }
