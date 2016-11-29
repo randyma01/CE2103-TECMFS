@@ -36,6 +36,7 @@ Disk::Disk() {
 	 const char* ip = doc.FirstChildElement( "diskNode" )->FirstChildElement("config")->FirstChildElement("ip")->GetText();
 	 const char* port = doc.FirstChildElement( "diskNode" )->FirstChildElement("config")->FirstChildElement("port")->GetText();
 	 string path = doc.FirstChildElement( "diskNode" )->FirstChildElement("config")->FirstChildElement("path")->GetText();
+	 doc.~XMLDocument();
 
 	 const char *pathDirectory = path.c_str();
 	 this->ip = ip;
@@ -50,11 +51,29 @@ Disk::Disk() {
 
 	 mkdir(pathDirectory, 0700); /*Make the Directory with the given path.*/
 
-	 /*folder -> caminos*/
-	 const char *pathBlockA= "/home/randy/DiskT/BlockA.txt"; /*Create the path and the file for the blocks to be saved.*/
-	 const char *pathBlockB="/home/randy/DiskT/BlockB.txt"; /*Create the path and the file for the blocks to be saved.*/
-	 const char *pathBlockC="/home/randy/DiskT/BlockC.txt"; /*Create the path and the file for the blocks to be saved.*/
-	 const char *pathBlockP="/home/randy/DiskT/BlockP.txt"; /*Create the path and the file for the blocks to be saved.*/
+	 /*Create the path and the file for the Blocks to be saved.*/
+	 /*A: Block A*/
+	 string a = path + "/BlockA.txt";
+	 const char *pathBlockA= a.c_str(); /*Create the path and the file for the blocks to be saved.*/
+
+	 /*B: Block B*/
+	 string b = path + "/BlockB.txt";
+	 const char *pathBlockB= b.c_str();  /*Create the path and the file for the blocks to be saved.*/
+
+	 /*C: BlockC*/
+	 string c = path + "/BlockC.txt";
+	 const char *pathBlockC= c.c_str();  /*Create the path and the file for the blocks to be saved.*/
+
+	 /*P: Parity*/
+	 string p = path + "/BlockP.txt";
+	 const char *pathBlockP= p.c_str(); /*Create the path and the file for the blocks to be saved.*/
+
+
+//	 /*Files -> paths*/
+//	 const char *pathBlockA= "/home/randy/DiskT/BlockA.txt"; /*Create the path and the file for the blocks to be saved.*/
+//	 const char *pathBlockB="/home/randy/DiskT/BlockB.txt"; /*Create the path and the file for the blocks to be saved.*/
+//	 const char *pathBlockC="/home/randy/DiskT/BlockC.txt"; /*Create the path and the file for the blocks to be saved.*/
+//	 const char *pathBlockP="/home/randy/DiskT/BlockP.txt"; /*Create the path and the file for the blocks to be saved.*/
 
 
 	 /*Set the blocks.*/

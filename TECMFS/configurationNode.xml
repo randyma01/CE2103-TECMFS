@@ -3,6 +3,6 @@
 <config>	
 	<ip>172.19.13.139</ip>
 	<port>8080</port>
-	<path>/home/randy/DiskT</path>
+	<path>/home/randy/Desktop/DiskT</path>
 </config>
 </diskNode>
