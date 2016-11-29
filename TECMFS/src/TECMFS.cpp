@@ -78,9 +78,10 @@ int main() {
 			string parity = disk1.sendParityDisk(); /*Gets the parity as a string.*/
 			diskNode1.sendMsj(parity); /*Send the parity to the Server's Controlle Node.*/
 		}
-		/*To sn*/
+		/*To delete information.*/
 		else if(msj == "DeleteDisk"){
-			disk1.cleanDisk();
+			disk1.cleanDisk(); /*Deletes all the data from the Disk.*/
+			//debería desconectarse
 		}
 	}
 
