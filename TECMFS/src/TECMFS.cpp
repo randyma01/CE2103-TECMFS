@@ -81,6 +81,7 @@ int main() {
 		/*To delete information.*/
 		else if(msj == "DeleteDisk"){
 			disk1.cleanDisk(); /*Deletes all the data from the Disk.*/
+			diskNode1.sendMsj("DeleteNode");
 			//debería desconectarse
 		}
 	}
