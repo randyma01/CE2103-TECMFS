@@ -24,7 +24,7 @@ private:
 	/*Attributes*/
 	string ID; /*Identificator of this Block*/
 	int size = 10000000; /*Size of the block: bytes.*/
-	const char * path; /*Path of the location of the save data.*/
+	string path; /*Path of the location of the save data.*/
 	char name; /*Name of the block.*/
 
 

@@ -23,13 +23,13 @@ Block::Block(){
 /**
  * Constructor.
  */
-Block::Block(char name, const char *path) {
-	this->path = path; /*Set the path for the file, assing from the Disk.*/
+Block::Block(char name, const char *path1) {
+	this->path = path1; /*Set the path for the file, assing from the Disk.*/
 	cout << "(Block.cpp - Block() ) Path of the saving Block: " << path << endl; /*FLAG*/
 	this->ID = generateID(); /*Set an ID for this ID block.*/
 	this->size = 10000000; /*Set the size of the block, amounts in bytes.*/
 	this->name = name; /*Set the name of the block.*/
-	ofstream file(path); /*Creates a file inside the Disk file.*/
+	ofstream file(this->path.c_str()); /*Creates a file inside the Disk file.*/
 }
 
 /**
@@ -63,8 +63,8 @@ int Block::getSize(){
  * @path
  */
 const char * Block::getPath(){
-	cout << "(At Block.ccp - getPath() ): " <<  this->path << endl; /*FLAG.*/
-	return this->path;
+	cout << "(At Block.ccp - getPath() string path): " <<  this->path << endl; /*FLAG.*/
+	return this->path.c_str();
 }
 
 /**
@@ -81,8 +81,9 @@ char Block::getName(){
  */
 void Block::saveData(string data){
 	string id = this->getID();
-	const char * path = getPath();
-	cout << "(At Block.cpp - saveData() ) Path of the saving Block: " <<  getPath() << endl; /*FLAG*/
+	const char * path = this->getPath();
+	cout << "(At Block.cpp - saveData() ) Path of the saving Block this->getPath: " <<  this->getPath() << endl; /*FLAG*/
+	cout << "(At Block.cpp - saveData() ) Path of the saving Block const char path: " << path << endl; /*FLAG*/
 	fstream myfile(path, fstream::in|fstream::out|fstream::app);
 	if (myfile.is_open()){
 		myfile << data;

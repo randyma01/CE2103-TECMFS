@@ -46,8 +46,9 @@ Disk::Disk() {
 	 /*Create the path and the file for the Blocks to be saved.*/
 	 /*A: Block A*/
 	 string a = path + "/BlockA.txt";
-	 cout <<  "Path of the Block A: " << a << endl; /*FLAG*/
+	 cout <<  "(At Disk.cpp - Disk() )Path of the Block A: " << a << endl; /*FLAG*/
 	 const char *pathBlockA= a.c_str(); /*Create the path and the file for the blocks to be saved.*/
+	 //char * pathBlockA= "/home/randy/DiskT/BlockA.txt";
 
 	 /*B: Block B*/
 	 string b = path + "/BlockB.txt";
