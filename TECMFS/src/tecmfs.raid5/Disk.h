@@ -32,8 +32,6 @@ class Disk {
 
 private:
 	/*Attributes*/
-	const char * ip; /*IP number for the Disk.*/
-	const char * port; /*PORT number of the Disk.*/
 	const char * pathDirectory; /*Path of the location of the save data.*/
 	string name; /*Name of the Disk.*/
 	int size = 40000000; /*Size of the Disk.*/
@@ -54,8 +52,6 @@ public:
 	virtual ~Disk(); /*Destroyer.*/
 
 	/*Getters*/
-	const char *  getIP();
-	const char *  getPort();
 	const char * getPathDirectory();
 	string getName();
 	vector<Block> getVectorBlocks();

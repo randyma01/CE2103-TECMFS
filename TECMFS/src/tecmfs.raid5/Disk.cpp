@@ -31,18 +31,12 @@ Disk::Disk() {
  *Constructor.
  */
  Disk::Disk(string name){
-	 XMLDocument doc;
-	 doc.LoadFile("configurationNode.xml");
-	 const char* ip = doc.FirstChildElement( "diskNode" )->FirstChildElement("config")->FirstChildElement("ip")->GetText();
-	 const char* port = doc.FirstChildElement( "diskNode" )->FirstChildElement("config")->FirstChildElement("port")->GetText();
+	 XMLDocument doc; /*Object reader document.*/
+	 doc.LoadFile("configurationNode.xml"); /*Load the XML file.*/
 	 string path = doc.FirstChildElement( "diskNode" )->FirstChildElement("config")->FirstChildElement("path")->GetText();
-	 doc.~XMLDocument();
 
-	 const char *pathDirectory = path.c_str();
-	 this->ip = ip;
-	 this->port = port;
-	 this->pathDirectory = pathDirectory;
-
+	 const char *pathDirectory = path.c_str(); /*Get the path for the Folder.*/
+	 this->pathDirectory = pathDirectory; /*Sets the path for the Folder.*/
 	 this->name = name; /*Set Name.*/
 
 	 cout <<  "Path of the Disk: " << pathDirectory << endl; /*FLAG*/
@@ -85,24 +79,6 @@ Disk::Disk() {
  * Destroyer.
  */
 Disk::~Disk() {
-}
-
-/**
- * Return the IP number of the Disk.
- *
- * @return ip const char *
- */
-const char *  Disk::getIP(){
-	return ip;
-}
-
-/**
- * Return the Port number of the Disk.
- *
- * @return port const char *
- */
-const char *  Disk::getPort(){
-	return port;
 }
 
 /**
@@ -266,7 +242,3 @@ void Disk::deleteBlock(int i){
 	vectorBlocks.at(i).deleteFile();
 	vectorBlocks.at(i).~Block();
 }
-
-
-
-

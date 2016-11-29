@@ -63,7 +63,8 @@ int Block::getSize(){
  * @path
  */
 const char * Block::getPath(){
-	return path;
+	cout << "(At Block.ccp - getPath() ): " <<  this->path << endl; /*FLAG.*/
+	return this->path;
 }
 
 /**
@@ -80,11 +81,11 @@ char Block::getName(){
  */
 void Block::saveData(string data){
 	string id = this->getID();
-	const char * path = this->getPath();
-	cout << "(At Block.cpp - saveData() ) Path of the saving Block: " <<  this->getPath() << endl; /*FLAG*/
+	const char * path = getPath();
+	cout << "(At Block.cpp - saveData() ) Path of the saving Block: " <<  getPath() << endl; /*FLAG*/
 	fstream myfile(path, fstream::in|fstream::out|fstream::app);
 	if (myfile.is_open()){
-		myfile << data << endl;
+		myfile << data;
 		myfile.close();
 		cout << "All data was written and saved." << endl; /*FLAG*/
 	}else{
