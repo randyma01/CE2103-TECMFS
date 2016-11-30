@@ -11,9 +11,6 @@
 #include "Collections.h"
 
 
-/**
- * Extra code, variables for connections.
- */
 vector<int> socketNode;
 vector<string> dataVideo;
 
@@ -21,9 +18,12 @@ struct sockaddr_in cli_addr;
 int socketClient;
 string message;
 
-Collections collections; /*Object Collections, for keeping register of all the video's Document uploaded.*/
-ControllerNode controller; /*Object ControllerNode, for managing the data at the RAID5 Disks Nodes.*/
+Collections collections;
 
+
+/**
+ * otro codigo
+ */
 fd_set read_fds;
 fd_set write_fds;
 
@@ -35,7 +35,9 @@ int nbytes;
 int selectSocket;
 char buffer[1024];
 time_t ticks;
-/***************************************/
+
+
+ControllerNode controller;
 
 /**
  * Constructor. Set up the connection for the Server.
@@ -83,7 +85,7 @@ ServerSockets::ServerSockets() {
 	 * command ifconfig
 	 *
 	 */
-	strncpy(ifr.ifr_name, "wlp10s0", IFNAMSIZ-1); /*Second parameter must be change on the computer to use: get form "ifoconfig" Linux Bash at Terminal.*/
+	strncpy(ifr.ifr_name, "enp11s0", IFNAMSIZ-1);
 	ioctl(socketServer, SIOCGIFADDR, &ifr);
 	cout << "Server IP: " << (inet_ntoa(((struct sockaddr_in *)&ifr.ifr_addr)->sin_addr)) << endl;
 	cout << "Server Port: " << (PORT) << endl;
@@ -166,126 +168,160 @@ void ServerSockets::run(){
 					client_socket[i] = 0;
 				}
 				else{
-					/*If the message receive is "DiskNode" the client is detected and manage as a Disk Node.*/
 					if (message == "DiskNode"){
 						socketNode.push_back(sd);
 						//sendMSG(sd, "Agregado como Node");
 					}
-					/*If the message is "OMP" the client is detected as the Odyssey Media Player.*/
 					if (message == "OMP"){
 						sendMSG(sd, "Bienvenido Odissey MP");
 					}
-					/*If the message is "UpaloadFile", the Odyssey Media Player ask to save a video.*/
 					if (message == "UploadFile"){
 						cout << "Recibir archivo desde OMP\n";
+						string message1 = receiveMSG(sd);
 
-						string message1 = receiveMSG(sd); /*Binary data file of the video.*/
+						int bytesVideo = message1.length();
+						string name = receiveMSG(sd);
+						string lengthms = receiveMSG(sd);
+						string description = receiveMSG(sd);
+						string owner = receiveMSG(sd);
+						string title = receiveMSG(sd);
+						string date = receiveMSG(sd);
 
-						int bytesVideo = message1.length(); /*Length of the binary data.*/
+						Document document = Document(name, bytesVideo, lengthms, description,
+								 owner, title, date);
+						collections.addDocument(document);
 
-						string name = receiveMSG(sd); /*Name of the Video.*/
-
-						Document document = Document(name, bytesVideo); /*A new document is created to save the video register; with name and size.*/
-
-						collections.addDocument(document); /*This new Document is saved into the collections to keep regiter of all the videos..*/
-
-						/*iI the binary data is not divisble bewteen three, 0's are added to the string of data.*/
-						while (message1.length()%3 !=0){
-							message1+="0";
-						}
-
-						int lengCut = (message1.length()) / 3; /*Sets the length to be divided by three.*/
-						while(message1 != ""){
-							string cut = message1.substr(0, lengCut); /*Cuts the string, into three parts.*/
-							dataVideo.push_back(cut); /*Keeps all three parts into a vector of all the data.*/
-							message1 = message1.substr(lengCut, message1.length() -1); /*Gets the parity from the three parts.*/
-						}
-						/*Divides the data file into four parrts, the last one is the parity.*/
-						string A1 = dataVideo.operator [](0); /*Identify the first part as A1.*/
-						string A2 = dataVideo.operator [](1); /*Identify the first part as A2.*/
-						string A3 = dataVideo.operator [](2); /*Identify the first part as A3.*/
-						string Ap = controller.parityMgmt(A1, A2, A3); /*Identify the first part as Ap.*/
-						cout << "save parity Ap" << endl;
-
-						cout << "cantidad de nodos: " << (int)socketNode.size() << endl;
-
-						/*Sends all four parts to the Disk Nodes to be saved. All three first parts are send as generic data. The Parity is saved apart.*/
-						cout << "largo de A1: " << A1.length() << endl;
-						sendMSG(socketNode.operator [](0), "SaveData");
-						sendMSG(socketNode.operator [](0), A1);
-
-						cout << "largo de A2: " << A2.length() << endl;
-						sendMSG(socketNode.operator [](1), "SaveData");
-						sendMSG(socketNode.operator [](1), A2);
-
-						cout << "largo de A3: " << A3.length() << endl;
-						sendMSG(socketNode.operator [](2), "SaveData");
-						sendMSG(socketNode.operator [](2), A3);
-
-						cout << "largo de Ap: " << Ap.length() << endl;
-						sendMSG(socketNode.operator [](3), "SaveParity");
-						sendMSG(socketNode.operator [](3), Ap);
+//						while (message1.length()%3 !=0){
+//							message1+="0";
+//						}
+//
+//						int lengCut = (message1.length()) / 3;
+//						while(message1 != ""){
+//							string cut = message1.substr(0, lengCut);
+//							dataVideo.push_back(cut);
+//							message1 = message1.substr(lengCut, message1.length() -1);
+//						}
+//						string A1 = dataVideo.operator [](0);
+//						string A2 = dataVideo.operator [](1);
+//						string A3 = dataVideo.operator [](2);
+//						string Ap = controller.parityMgmt(A1, A2, A3);
+//						cout << "save parity Ap" << endl;
+//
+//						cout << "cantidad de nodos: " << (int)socketNode.size() << endl;
+//
+//						cout << "largo de A1: " << A1.length() << endl;
+//						sendMSG(socketNode.operator [](0), "SaveData");
+//						sendMSG(socketNode.operator [](0), A1);
+//
+//						cout << "largo de A2: " << A2.length() << endl;
+//						sendMSG(socketNode.operator [](1), "SaveData");
+//						sendMSG(socketNode.operator [](1), A2);
+//
+//						cout << "largo de A3: " << A3.length() << endl;
+//						sendMSG(socketNode.operator [](2), "SaveData");
+//						sendMSG(socketNode.operator [](2), A3);
+//
+//						cout << "largo de Ap: " << Ap.length() << endl;
+//						sendMSG(socketNode.operator [](3), "SaveParity");
+//						sendMSG(socketNode.operator [](3), Ap);
 
 						cout << "complete receive data video\n";
 					}
-
-					/*if the messages from the Odyssey Media Player is "Complete Upload", this Server answer back with "Upload your file.".*/
 					if(message == "Complete Upload"){
 						sendMSG(sd, "Upload your file!!");
 					}
-					/*If the message is "Streaming" the Odyssey Media Player is asking for the reproduce of a video..*/
 					if(message == "Streaming"){
-						string nameVideo = receiveMSG(sd); /*Odyssey Media Player must send the name of the video for the previous search.*/
+						string parameter = receiveMSG(sd);
 
-						/*Makes the search: Linear Search from all the Documents at the Collection's vector. */
-						if(collections.searchDocument(nameVideo)){
-							int sizeVideo = collections.getDocumentVector().at(0).getSize(); /*if the video exists, it gets the size of the file.*/
+						if(collections.searchDocument(parameter)){
+							cout << "si hemos encontrado el video" << endl;
+							int sizeVideo = collections.getDocument().getSize();
 
-							/*It gets all the binary data from all the Disks Nodes. Including Parity.*/
-							sendMSG(socketNode.operator [](0), "SendData");
-							string A1 = receiveMSG(socketNode.operator [](0));
+//							sendMSG(socketNode.operator [](0), "SendData");
+//							string A1 = receiveMSG(socketNode.operator [](0));
+//
+//							sendMSG(socketNode.operator [](1), "SendData");
+//							string A2 = receiveMSG(socketNode.operator [](1));
+//
+//							sendMSG(socketNode.operator [](2), "SendData");
+//							string A3 = receiveMSG(socketNode.operator [](2));
+//
+//							sendMSG(socketNode.operator [](3), "Send Parity");
+//							string Ap = receiveMSG(socketNode.operator [](3));
+//
+//							if (A1 == ""){
+//								cout << "se borro A1\n";
+//								A1 = controller.parityMgmt(A2, A3, Ap);
+//								cout << "largo de A1 paridad: "  << A1.length() << endl;
+//							}
+//							if (A2 == ""){
+//								cout << "se borro A2\n";
+//								A2 = controller.parityMgmt(A1, A3, Ap);
+//								cout << "largo de A2 paridad: "  << A2.length() << endl;
+//							}
+//							if (A3 == ""){
+//								cout << "se borro A3\n";
+//								A3 = controller.parityMgmt(A1, A2, Ap);
+//								cout << "largo de A3 paridad: "  << A3.length() << endl;
+//							}
+//							cout << "se creo la paridad\n";
+//							string data = A1 + A2 + A3;
+//							data = data.substr(0, sizeVideo);
+//							cout << "largo de data binaria: " << data.length() << endl;
+//							sendMSG(sd, data);
 
-							sendMSG(socketNode.operator [](1), "SendData");
-							string A2 = receiveMSG(socketNode.operator [](1));
+						}
+						else{
+							cout << "No se ha encontrado el vide" << endl;
+						}
+					}
+					if(message == "Edit"){
+						string parameter = receiveMSG(sd);
 
-							sendMSG(socketNode.operator [](2), "SendData");
-							string A3 = receiveMSG(socketNode.operator [](2));
+						if(collections.searchDocument(parameter)){
+							cout << "Editar metadata" << endl;
+							string name = collections.getDocument().getName();
+							string duration = collections.getDocument().getLength();
+							string description = collections.getDocument().getDescription();
+							string date = collections.getDocument().getDate();
+							string title = collections.getDocument().getTitle();
 
-							sendMSG(socketNode.operator [](3), "Send Parity");
-							string Ap = receiveMSG(socketNode.operator [](3));
+							sendMSG(sd, name);
+							sleep(1);
+							 cout << "Envio el primer parametro" << endl;
+							sendMSG(sd, duration);
+							sleep(1);
+							sendMSG(sd, description);
+							sleep(1);
+							sendMSG(sd, date);
+							sleep(1);
+							sendMSG(sd, title);
+							sleep(1);
+							cout << "Envio todos los parametros" << endl;
 
-							/*In case that one Disk Node is lost from the Server connections
-							 * or the data is not send or lost, the Server checks the data send
-							 * from all the Disks Node. If one is missing, using the ControllerNodes's
-							 * parity functions the missing data is recover and the original data is
-							 * get back. The missing data is not saved, is used to recreate the original
-							 * binary data of the file and sent to the Odyssey Media Player to stream the
-							 * video.*/
+							string message = receiveMSG(sd);
+							if(message == "UploadEdit"){
+								string nameEdit = receiveMSG(sd);
+								string durationEdit = receiveMSG(sd);
+								string descriptionEdit = receiveMSG(sd);
+								string dateEdit = receiveMSG(sd);
+								string titleEdit = receiveMSG(sd);
+								/*
+								 * Set Document
+								 */
+								collections.getDocument().setDate(dateEdit);
+								collections.getDocument().setDescription(descriptionEdit);
+								collections.getDocument().setLength(durationEdit);
+								collections.getDocument().setName(nameEdit);
+								collections.getDocument().setTitle(titleEdit);
 
-							/*If A1 is missing.*/
-							if (A1 == ""){
-								cout << "se borro A1\n";
-								A1 = controller.parityMgmt(A2, A3, Ap);
-								cout << "largo de A1 paridad: "  << A1.length() << endl; /*FLAG	that the missing data string is recover.*/
+								cout << collections.getDocument().getName() << endl;
+
 							}
-							/*If A2 is missing.*/
-							if (A2 == ""){
-								cout << "se borro A2\n";
-								A2 = controller.parityMgmt(A1, A3, Ap);
-								cout << "largo de A2 paridad: "  << A2.length() << endl; /*FLAG	that the missing data string is recover.*/
-							}
-							/*If A2 is missing.*/
-							if (A3 == ""){
-								cout << "se borro A3\n";
-								A3 = controller.parityMgmt(A1, A2, Ap);
-								cout << "largo de A3 paridad: "  << A3.length() << endl; /*FLAG	that the missing data string is recover.*/
-							}
-							cout << "se creo la paridad\n"; /*FLAG that all the data is recover.*/
-							string data = A1 + A2 + A3; /*Recover of all the data together.*/
-							data = data.substr(0, sizeVideo); /* Recover original binary data, taking out all the 0's added.*/
-							cout << "largo de data binaria: " << data.length() << endl; /*FLAG that the original size sent at first is the same to sent back.*/
-							sendMSG(sd, data); /*Send the data to the Odyssey Media Player.*/
 
+						}
+						else{
+							cout << "No se ha encontrado el vide" << endl;
 						}
 					}
 				}
@@ -312,12 +348,7 @@ void ServerSockets::sendMSG(int socketClient, string message){
 	}
 }
 
-/**
- * Receive the messages from the client.
- *
- * @param socketClient
- * @return message string
- */
+
 string ServerSockets::receiveMSG(int socketClient){
 	char *buffer = new char[MAXDATA];
 	int buffsize = (MAXDATA);

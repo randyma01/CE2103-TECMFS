@@ -1,12 +1,12 @@
 /*
- * Sockets.h
+ * ServerSockets.h
  *
- *  Created on: Nov 21, 2016
- *      Author: randy
+ *  Created on: 10 nov. 2016
+ *      Author: gustavo, randy, fernanda
  */
 
-#ifndef TECMFS_SERVER_SERVERSOCKETS_H_
-#define TECMFS_SERVER_SERVERSOCKETS_H_
+#ifndef SERVERSOCKETS_H_
+#define SERVERSOCKETS_H_
 
 #include <netinet/in.h>
 #include <netdb.h>
@@ -15,6 +15,8 @@
 #include <sys/un.h>
 #include <sys/ioctl.h>
 #include <sys/stat.h>
+#include <sys/types.h>
+#include <sys/time.h>
 #include <net/if.h>
 #include <errno.h>
 #include <ifaddrs.h>
@@ -25,55 +27,28 @@
 #include <cstdlib>
 #include <stdio.h>
 #include <vector>
+#include <pthread.h>
+#include <fstream>
 
-#include "Document.h"
-#include "Collections.h"
-#include "ControllerNode.h"
-
+using namespace std;
 
 #define MAXDATA 64000000
 #define MAXCONNECTIONS 5
 #define PORT 8080
 
-
-using namespace std;
-/**
- * Server Sockets is a class that manages the connecions
- * and the data transfer through it. It connects the
- * Odissey Media Player and the Disk Node.
- */
 class ServerSockets {
 
-
-
 public:
-	/*Methods.*/
-	ServerSockets();/*Constructor.*/
-	virtual ~ServerSockets(); /*Destructor.*/
-	void run();/*Makes the connection.*/
-
+	ServerSockets();
+	void run();
+	virtual ~ServerSockets();
 
 private:
-	/*Attributes.*/
-	int socketServer; /*Socket integer manager.*/
-	socklen_t cliLen; /*Socket client.*/
-
-	ControllerNode controllerNode = ControllerNode(); /*Controller Node for the data and the Disk Nodes.*/
-	Collections collection =  Collections(); /*Collections for all the new data incoming.*/
-
-
-	/*Methods.*/
-	void sendMSG(int client, string msg); /*Send messages to the client.*/
-	string receiveMSG(int client); /*Receive messages from the client.*/
+	int socketServer;
+	socklen_t cliLen;
+	void sendMSG(int client, string msg);
+	string receiveMSG(int client);
 
 };
 
-#endif /* TECMFS_SERVER_SERVERSOCKETS_H_ */
-
-
-
-
-
-
-
-
+#endif /* SERVERSOCKETS_H_ */

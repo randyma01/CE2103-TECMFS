@@ -10,9 +10,15 @@
 Document::Document() {
 }
 
-Document::Document(string name, int size){
+Document::Document(string name, int size, string length, string description,
+		string owner, string title, string date){
 	this->name = name;
 	this->size = size;
+	this->length = length;
+	this->description = description;
+	this->owner = owner;
+	this->title = title;
+	this->date = date;
 }
 
 Document::~Document() {
@@ -22,7 +28,7 @@ string Document::getName(){
 	return name;
 }
 
-int Document::getLength(){
+string Document::getLength(){
 	return length;
 }
 
@@ -34,7 +40,36 @@ string Document::getOwner(){
 	return owner;
 }
 
-char Document::getDescription(){
-	return description[350];
+string Document::getDescription(){
+	return description;
+}
+
+string Document::getTitle(){
+	return title;
+}
+
+string Document::getDate(){
+	return date;
+}
+
+
+string Document::setDate(string date){
+	this->date = date;
+}
+
+string Document::setDescription(string description){
+	this->description = description;
+}
+
+string Document::setName(string name){
+	this->name = name;
+}
+
+string Document::setTitle(string title){
+	this->title = title;
+}
+
+string Document::setLength(string length){
+	this->length = length;
 }
 

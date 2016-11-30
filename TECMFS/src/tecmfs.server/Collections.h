@@ -50,6 +50,8 @@ public:
 	void printCollection(); /*Prints the entire Collection's List.*/
 	bool searchDocument(string name); /*Searches a Document inside the list.*/
 
+	Document getDocument();
+
 };
 
 #endif /* TECMFS_SERVER_COLLECTIONS_H_ */

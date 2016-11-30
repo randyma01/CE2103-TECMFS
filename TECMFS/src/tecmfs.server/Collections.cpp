@@ -7,6 +7,9 @@
 
 #include "Collections.h"
 
+int indice;
+bool answer;
+
 /**
  * Constructor.
  */
@@ -83,13 +86,46 @@ void Collections::printCollection(){
  * @param name string
  * @return doc Document
  */
-bool Collections::searchDocument(string name){
-	bool answer = false;
+bool Collections::searchDocument(string parameter){
+	answer = false;
 	for(int i = 0; i< (int) documentsVector.size(); i++){
-		if(name == documentsVector.at(i).getName()){
+		if(parameter == documentsVector.at(i).getName()){
 			answer = true;
+			indice = i;
+			break;
+		}
+		else if(parameter == documentsVector.at(i).getDescription()){
+			answer = true;
+			indice = i;
+			break;
+		}
+		else if(parameter == documentsVector.at(i).getLength()){
+			answer = true;
+			indice = i;
+			break;
+		}
+		else if(parameter == documentsVector.at(i).getOwner()){
+			answer = true;
+			indice = i;
+			break;
+		}
+		else if(parameter == documentsVector.at(i).getDate()){
+			answer = true;
+			indice = i;
+			break;
+		}
+		else if(parameter == documentsVector.at(i).getTitle()){
+			answer = true;
+			indice = i;
 			break;
 		}
 	}
 	return answer;
+}
+
+
+Document Collections::getDocument(){
+	if(answer){
+		return documentsVector.at(indice);
+	}
 }
