@@ -77,7 +77,12 @@ char Block::getName(){
 }
 
 /**
- * http://www.cplusplus.com/doc/tutorial/files/
+ * Receives any data as a string and writes it (saves it) at the Block.txt
+ * file from the path saved at this object attribute.
+ *
+ * Code taken from: http://www.cplusplus.com/doc/tutorial/files/
+ *
+ * @param data string.
  */
 void Block::saveData(string data){
 	string id = this->getID();
@@ -95,7 +100,10 @@ void Block::saveData(string data){
 }
 
 /**
- * http://www.cplusplus.com/doc/tutorial/files/
+ * Reads all data from the Block.txt file
+ * from the path saved at this object attribute.
+ *
+ * Code taken from: http://www.cplusplus.com/doc/tutorial/files/
  */
 void Block::readData(){
 	string line;
@@ -112,9 +120,14 @@ void Block::readData(){
 }
 
 /**
- * http://www.cplusplus.com/doc/tutorial/files/
+ * Reads all data from the Block.txt file
+ * from the path saved at this object attributed
+ * and saved it as a string (data). It retuns that data (string).
+ *
+ * Code taken from: http://www.cplusplus.com/doc/tutorial/files/
+ *
+ *@return data string
  */
-//CAMBIAR METODO DE LECTURA!!!!!!!!!!!!!!!!!!!!!!!!!1
 
 string Block::getData(){
 	string data,line;
@@ -132,6 +145,11 @@ string Block::getData(){
 }
 
 
+/**
+ * Clean all the data from the Block.txt file
+ * by rewrtting all data. It writes an black space
+ * on the file. All the original data saved before is lost.
+ */
 void Block::cleanBlock(){
 	string id = this->getID();
 	const char * path = this->getPath();
@@ -161,6 +179,13 @@ int Block::getSizeData(){
 	return fileSize;
 }
 
+/**
+ * It gets the size of the file and compares it
+ * to the attribute size (10000000). If the size of the file
+ * is smaller it returns true, else false.
+ *
+ * @retirn freeSpace bool
+ */
 bool Block::checkSizeData(){
 	bool freeSpace = false;
 	//int fileSize = this->getSizeData();
@@ -170,6 +195,9 @@ bool Block::checkSizeData(){
 
 }
 
+/**
+ * It deletes the Block.txt.
+ */
 void Block::deleteFile(){
 	const char * path = this->getPath();
 	if( remove(path)!=0 ){
@@ -182,7 +210,7 @@ void Block::deleteFile(){
 /**
  * Converts an number (int) into a string.
  *
- * http://stackoverflow.com/questions/5590381/easiest-way-to-convert-int-to-string-in-c
+ * Code taken from http://stackoverflow.com/questions/5590381/easiest-way-to-convert-int-to-string-in-c
  *
  * @param <T> number
  * @return bool
