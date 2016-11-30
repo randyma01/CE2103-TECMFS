@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <diskNode>
 <config>	
-	<ip>192.168.43.233</ip>
+	<ip>172.19.13.139</ip>
 	<port>8080</port>
 	<path>/home/randy/DiskT</path>
 </config>

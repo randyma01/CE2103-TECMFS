@@ -181,6 +181,7 @@ string Disk::sendDataDisk(){
 	dataB = vectorBlocks.at(1).getData();
 	dataC = vectorBlocks.at(2).getData();
 	allData = dataA + dataB + dataC;
+	cout << "Disk's data sent succesfully." << endl;
 	//this->cleanDisk();
 	return allData;
 }
